@@ -1,15 +1,32 @@
 # QtClock
-Smart clock UI for the Raspberry Pi built with Python and QtQuick
+Smart clock UI for the Raspberry Pi built with Python and QtQuick.
 
 # About 
-This app is based on QML using the PyQt5 toolkit. It is intended to run on a Raspberry Pi connected to a round 1080x1080 LCD display. 
+This app was built with Python and the PyQt5 toolkit. The UI is touch-based, and is intended to run on a Raspberry Pi connected to a round 1080x1080 LCD display. 
 
-The current version is only a proof of concept, but feel free to give it a try! I've created a default theme that displays the time, date, and temperature. Take a look:
-![clockdemo](https://github.com/danm11r/QtClock/assets/148667664/28a02fce-975e-44b0-a811-4645f9ff6266)
+The current version is only a proof of concept, but feel free to give it a try! The app has three clockfaces which can be accessed by swiping left or right on a touch screen, or by clicking and dragging accross the window. Each clock faces provides the current time, date, and basic weather information. I've also added a rudimentary settings page for switching between the two avaliable color schemes. 
+![clockdemo2](https://github.com/danm11r/QtClock/assets/148667664/27cdffc5-eb1d-4b7d-bb78-6f1c7303b4bc)
 
 # Installation 
+Here's a brief overview of installing the app on a Raspberry Pi with Raspberry Pi OS Lite, and configuring it to run on startup without a display manager. The app has been tested on both a Pi B+ and a Pi 4. Performance on the B+ was poor when swiping between clockfaces, I recommend using something newer. 
 
-A detailed guide on installing this app on the Raspberri Pi is coming soon. In the meantime, you can easily get the app running on a Linux machine by installing the python modules listed in `requirements.txt`.
+First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/QtClock`. 
 
-Also note that for live temperature data, you need to provide an OpenWeather API key (which you can get for free). Add your API key and zip code to the `weather.py` file; otherwise, only placeholder values will be shown. 
+Then install python and the necessary PyQt5 packages with the following command:
+`sudo apt-get install python3 python3.pyqt5 python3-pyqt5.qtquick qml-module-qtquick-shapes qml-module-qtquick-controls2`
+
+The included clockfaces use the noto sans font family, install it with the following command: `sudo apt-get install fonts-noto`
+
+You should now be able to run the app. From the QtQuick directory, run the following command to launch the app using the openGL renderer, bypassing the need for a display server: `python3 main.py --platform eglfs`
+ 
+
+
+
+
+
+
+
+
+
+
 
