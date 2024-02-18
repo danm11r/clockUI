@@ -1,9 +1,9 @@
-// Daniel Miller Jan 2024
+// DM Jan 2024
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
 
-Rectangle {
+Item {
 
     // Draw background circle
     Shape {
@@ -22,28 +22,11 @@ Rectangle {
         } 
     }
 
-    // Draw day marks
-    Repeater {
-
-        model: 32
-
-        Rectangle {
-            x: - arcWidth/4
-            y: - widgetRadius
-            width: arcWidth/2
-            height: arcWidth
-            radius: 180
-            color: "#B4B4B4"
-
-            transform: Rotation { origin.x: arcWidth/4; origin.y: widgetRadius; angle: index*12 } 
-        }
-    }
-
     Shape {
 
         ShapePath {
             fillColor: "transparent"
-            strokeColor: primary//"#D1E231"
+            strokeColor: color1
             strokeWidth: arcWidth
             capStyle: ShapePath.RoundCap
 
@@ -64,20 +47,20 @@ Rectangle {
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: -12
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: -20
             text: currDate.date
-            font.pixelSize: 110  //44
+            font.pixelSize: textSize  //44
             color: "white"   
         }  
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: -12
+            anchors.bottom: parent.verticalCenter
+            anchors.bottomMargin: -20
             text: currDate.day
-            font.pixelSize: 96  //38
-            color: primary//"white"   
+            font.pixelSize: textSize  //38
+            color: color1
         }  
     }
 }

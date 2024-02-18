@@ -1,9 +1,11 @@
-// Daniel Miller Jan 2024
+// DM Jan 2024
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
 
 Item {
+
+    id: weatherWidget
 
     // Draw background circle
     Shape {
@@ -24,9 +26,12 @@ Item {
            
     // Draw temp guage
     Shape {
+
+        id: tempGauge
+
         ShapePath {
             fillColor: "transparent"
-            strokeColor: primary
+            strokeColor: color1
             strokeWidth: arcWidth
             capStyle: ShapePath.RoundCap
 
@@ -60,43 +65,100 @@ Item {
         } 
     }
 
-    // Text for current temp
+    Item {
+        id: weatherText
+        visible: true
+
+        // Text for current temp
+        Text {
+            id: mainText
+            anchors.centerIn: parent
+            text: currTemp.temp + "F"
+            font.pixelSize: textSize
+            color: "white"   
+        }  
+
+        Row {
+
+            spacing: 10
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: mainText.bottom
+            anchors.topMargin: -30
+
+            Text {
+                id: lowTemp
+                text: currTemp.tempL
+                font.pixelSize: textSize/2
+                color: "white"   
+            }  
+
+            // Draw divider
+            Rectangle {
+                anchors.verticalCenter: lowTemp.verticalCenter
+                width: arcWidth
+                height: arcWidth*2
+                radius: 180
+                color: color1
+            } 
+
+            Text {
+                text: currTemp.tempH
+                font.pixelSize: textSize/2
+                color: "white"   
+            }  
+        }
+    }
+
+    // API error message
     Text {
+        id: apiError
+        visible: false
         anchors.centerIn: parent
-        text: currTemp.temp
-        font.pixelSize: textSize
+        text: "API Err"
+        font.pixelSize: 80
         color: "white"   
     }  
 
-    // Min temp 
+    // Network error message
     Text {
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.topMargin: 55
-        anchors.leftMargin: -95
-        text: currTemp.tempL
-        font.pixelSize: textSize/2
+        id: networkError
+        visible: false
+        anchors.centerIn: parent
+        text: "Net Err"
+        font.pixelSize: 80
         color: "white"   
     }  
 
-    // Max temp
-    Text {
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.topMargin: 55
-        anchors.leftMargin: 25
-        text: currTemp.tempH
-        font.pixelSize: textSize/2
-        color: "white"   
-    } 
+    states: [
+        State {
+            name: "error1"
+            PropertyChanges { target: weatherText; visible: false }
+            PropertyChanges { target: apiError; visible: true }
+        },
+        State {
+            name: "error2"
+            PropertyChanges { target: weatherText; visible: false }
+            PropertyChanges { target: networkError; visible: true }
+        }
+    ]
 
-    // Draw divider
-    Rectangle {
-        x: - arcWidth/2
-        y: 80
-        width: arcWidth
-        height: arcWidth*2
-        radius: 180
-        color: primary //"#CE2029"
-    } 
+    Connections {
+        target: backend
+        
+        function onTemp(temp, tempL, tempH, tempPos, tempErr) {
+            currTemp = {'temp': temp, 'tempL': tempL, 'tempH': tempH,'tempPos': tempPos, 'tempErr': tempErr}
+            
+            // Determine the error state 
+            if (currTemp.tempErr == 0) {
+                weatherWidget.state = ""
+            }
+            else if (currTemp.tempErr == 1) {
+                weatherWidget.state = "error1"
+            }
+            else if (currTemp.tempErr == 2) {
+                weatherWidget.state = "error2"
+            }
+        }
+    }
 }

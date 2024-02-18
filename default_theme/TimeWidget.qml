@@ -1,4 +1,4 @@
-// Daniel Miller Jan 2024
+// DM Jan 2024
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
@@ -50,7 +50,7 @@ Item {
             width: arcWidth/2
             height: arcWidth
             radius: 180
-            color: primary
+            color: color1
 
             transform: Rotation { origin.x: arcWidth/4; origin.y: widgetRadius; angle: index*6 } 
         }
@@ -64,14 +64,14 @@ Item {
         width: arcWidth*2
         height: arcWidth
         radius: 180
-        color: "#CE2029"
+        color: accent
     }
 
     // Display current time
     Text {
         anchors.centerIn: parent
-        text: currTime.time
+        text: currTime.hour + ":" + currTime.min
         font.pixelSize: textSize
-        color: "white"   
+        color: "white"
     }
 }

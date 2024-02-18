@@ -1,11 +1,14 @@
 // Daniel Miller Jan 2024
 // QtClock
-// main.py stores global properties and imports the clockface
+// main.py stores global properties and imports clockfaces
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Shapes 1.15
 
-import "./default_theme" // Import theme directory for clock face and widgets
+// Import theme directory for clock face and widgets
+import "./default_theme" 
+import "./analog_theme"
 
 ApplicationWindow {
     id: main
@@ -14,48 +17,74 @@ ApplicationWindow {
     height: 1080
     
     title: "Clock"
+    color: "black"
 
     property QtObject backend
 
     // Widget properties and default values
-    property var currTime: {'time': "00:00", 'PM': false }
-    property var currDate: {'day': "NULL", 'date': "NULL", 'datePos': 0 }
-    property var currTemp: {'temp': "0", 'tempL': "0", 'tempH': "0", 'tempPos': 0, 'tempLPos': 0, 'tempHPos': 0}
+    property var currTime: {'hour': "00", 'min': "00", 'PM': false }
+    property var currDate: {'day': "NULL", 'date': "0", 'datePos': 0 }
+    property var currTemp: {'temp': "0", 'tempL': "0", 'tempH': "0", 'tempPos': 0, 'tempLPos': 0, 'tempHPos': 0, 'tempErr': 0 }
     property var hms: {'hour': 0, 'min': 0, 'sec': 0 }
 
-    // Set the center of the clockface. Value can be adjusted as needed to compensate for display aspect ratio
-    property int mainHCenter: main.width/2
-    property int mainVCenter: main.height/2
+    // Some values below are hardcoded but will soon be determined from display size 
+    property int clockRadius: 540
 
-    // Some values below are hardcoded but will soon be determined from display size
-    property int bezelBorder: 10       // How far UI elements should be from physical edge of screen 
-    property int arcWidth: width/60        
-    property int arcGap: width/120   
-    property int textSize: 120           
-    property int widgetRadius: 190        
-
-    // Global color values. ALL widgets should get colors from here for consistancy
-    property string primary: "#50C878"
-    property string secondary: "#3C965A"
-    property string tertiary: "#29663D"
+    // Global color values. Overridden when theme selected from settings page
+    property string color1: "#50C878"
+    property string color2: "#3C965A"
+    property string color3: "#29663D"
+    property string color4: "#112919"
+    property string accent: "#CE2029"
     property string bgcolor: "#2A2A2A"
 
-    // Place a clockface in the window
-    ClockFace {}    
+    // Arrays store color theme values
+    property variant color1Array: ["#50C878", "#15F4EE"]
+    property variant color2Array: ["#3C965A", "#11BFB9"]
+    property variant color3Array: ["#29663D", "#0E9994"]
+    property variant color4Array: ["#112919", "#042928"]
+
+    // Swipeview for multiple pages
+    SwipeView {
+        id: view
+
+        currentIndex: 2
+        anchors.fill: parent
+
+        Item {
+            id: firstPage
+
+            NightMode {}
+        }
+
+        Item {
+            id: secondPage
+            
+            DefaultClockFace { x: 540; y: 540 }
+        }
+
+        Item {
+            id: thirdPage
+
+            AnalogClockFace {}
+        }
+
+        Item {
+            id: fourthPage
+            
+            SettingsPage {}
+        }
+    }
 
     Connections {
         target: backend
 
-        function onTime(time, PM) {
-            currTime = {'time': time, 'PM': PM};
+        function onTime(hour, min, PM) {
+            currTime = {'hour': hour, 'min': min, 'PM': PM};
         }
 
         function onDate(day, date, datePos) {
             currDate = {'day': day, 'date': date, 'datePos': datePos};
-        }
-
-        function onTemp(temp, tempL, tempH, tempPos) {
-            currTemp = {'temp': temp, 'tempL': tempL, 'tempH': tempH,'tempPos': tempPos}
         }
 
         function onHms(hour, minute, second) {

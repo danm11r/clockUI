@@ -1,4 +1,4 @@
-// Daniel Miller Jan 2024
+// DM Jan 2024
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
@@ -56,39 +56,39 @@ Item {
         }
     }
 
-    // Hour hand
-    Rectangle {
-        x: -arcWidth/4
-        y: -widgetRadius
-        width: arcWidth/2
-        height: widgetRadius/4+arcWidth/4
-        radius: 180
-        color: secondary
-
-        transform: Rotation { origin.x: arcWidth/4; origin.y: widgetRadius; angle: hms.hour*30 } 
-    }
-
     // Minute hand
     Rectangle {
         x: -arcWidth/4
-        y: -widgetRadius
+        y: -arcWidth/4
+        width: arcWidth/2
+        height: Math.round(widgetRadius*(2/3))+arcWidth/4
+        radius: 180
+        color: color1
+
+        transform: Rotation { origin.x: arcWidth/4; origin.y: arcWidth/4; angle: hms.min*6 + 180 } 
+    }
+
+    // Hour hand
+    Rectangle {
+        x: -arcWidth/4
+        y: -arcWidth/4
         width: arcWidth/2
         height: widgetRadius/2+arcWidth/4
         radius: 180
-        color: primary
+        color: color2
 
-        transform: Rotation { origin.x: arcWidth/4; origin.y: widgetRadius; angle: hms.min*6 } 
+        transform: Rotation { origin.x: arcWidth/4; origin.y: arcWidth/4; angle: hms.hour*30 + 180 } 
     }
 
     // Second hand
     Rectangle {
         x: -arcWidth/4
-        y: -widgetRadius
+        y: -arcWidth/4
         width: arcWidth/2
         height: widgetRadius+arcWidth/4
         radius: 180
-        color: "#CE2029"
+        color: accent
 
-        transform: Rotation { origin.x: arcWidth/4; origin.y: widgetRadius; angle: hms.sec*6 } 
+        transform: Rotation { origin.x: arcWidth/4; origin.y: arcWidth/4; angle: hms.sec*6 + 180 } 
     }
 }

@@ -3,7 +3,7 @@
 import sys
 import random
 
-from PyQt5.QtGui import QGuiApplication
+from PyQt5.QtGui import QGuiApplication, QFont
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QTimer, QObject, pyqtSignal
 
@@ -14,6 +14,9 @@ import calendar
 
 app = QGuiApplication(sys.argv)
 
+mainFont = QFont("noto sans")
+app.setFont(mainFont)
+
 engine = QQmlApplicationEngine()
 engine.quit.connect(app.quit)
 engine.load('main.qml')
@@ -21,9 +24,9 @@ engine.load('main.qml')
 class Backend(QObject):
 
     # Signals for clock data (time, date, temp, etc)
-    time = pyqtSignal(str, bool, arguments=['time', 'PM'])
+    time = pyqtSignal(str, str, bool, arguments=['time_hour', 'time_minute', 'PM'])
     date = pyqtSignal(str, str, int, arguments=['day', 'date', 'datePos'])
-    temp = pyqtSignal(str, str, str, int, arguments=['temp', 'tempL', 'tempH', 'tempPos'])
+    temp = pyqtSignal(str, str, str, int, int, arguments=['temp', 'tempL', 'tempH', 'tempPos', 'tempErr'])
     hms = pyqtSignal(int, int, int, arguments=['hour', 'minute', 'second'])
 
     def __init__(self):
@@ -36,9 +39,9 @@ class Backend(QObject):
         self.timer1.timeout.connect(self.update_hms)
         self.timer1.start()
 
-        # 5 min timer for weather update
+        # 1 min timer for weather update
         self.timer2 = QTimer()
-        self.timer2.setInterval(300000)
+        self.timer2.setInterval(60000)
         self.timer2.timeout.connect(self.update_temp)
         self.timer2.start()
 
@@ -50,12 +53,13 @@ class Backend(QObject):
 
     # Get current time in string format, and set bool value if PM
     def update_time(self):
-        curr_time = strftime("%-I:%M", localtime()) 
-        if (strftime("%p") == "PM"):
+        curr_time_hour = strftime("%-I", localtime()) 
+        curr_time_min = strftime("%M", localtime()) 
+        if (strftime("%p").upper() == "PM"):
             PM = True
         else:
             PM = False
-        self.time.emit(curr_time, PM)
+        self.time.emit(curr_time_hour, curr_time_min, PM)
 
     # Get current date and day. Determine position of month progress bar for widget
     def update_date(self):
@@ -64,7 +68,7 @@ class Backend(QObject):
 
         now = datetime.today()
         num_days = calendar.monthrange(now.year, now.month)[1]
-        date_position = round(((now.day) * (360 - 0)) / (num_days))
+        date_position = round(((now.day) * (360)) / (num_days))
  
         self.date.emit(curr_day, curr_date, date_position)
 
@@ -77,9 +81,9 @@ class Backend(QObject):
         else:
             curr_temp_pos = 180
         
-        self.temp.emit(str(round(curr_temp[0])) + "\N{DEGREE SIGN}F", str(round(curr_temp[1])), str(round(curr_temp[2])), curr_temp_pos)
+        self.temp.emit(str(round(curr_temp[0])) + "\N{DEGREE SIGN}", str(round(curr_temp[1])), str(round(curr_temp[2])), curr_temp_pos, curr_temp[3])
 
-    # Integer values for current hour, minute, and second. Useful for analog clock display
+    # Int values for current hour, minute, and second. Useful for analog clock display
     def update_hms(self):
         curr_hms = localtime()
         self.hms.emit(curr_hms.tm_hour, curr_hms.tm_min, curr_hms.tm_sec)
