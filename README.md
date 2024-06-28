@@ -1,4 +1,4 @@
-# QtClock
+# clockUI
 Smart clock UI for the Raspberry Pi built with Python and QtQuick.
 
 # About 
@@ -10,14 +10,14 @@ The current version is only a proof of concept, but feel free to give it a try! 
 # Installation 
 Here's a brief overview of installing the app on a Raspberry Pi with Raspberry Pi OS Lite, and configuring it to run on startup without a display manager. The app has been tested on both a Pi B+ and a Pi 4. Performance on the B+ was poor when swiping between clockfaces, I recommend using something newer. 
 
-First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/QtClock`. 
+First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/clockUI`. 
 
 Then install python and the necessary PyQt5 packages with the following command:
 `sudo apt-get install python3 python3.pyqt5 python3-pyqt5.qtquick qml-module-qtquick-shapes qml-module-qtquick-controls2`
 
 The included clockfaces use the noto sans font family, install it with the following command: `sudo apt-get install fonts-noto`
 
-You should now be able to run the app. From the QtQuick directory, run the following command to launch the app using the openGL renderer, bypassing the need for a display server: `python3 main.py --platform eglfs`
+You should now be able to run the app. From the clockUI directory, run the following command to launch the app using the openGL renderer, bypassing the need for a display server: `python3 main.py --platform eglfs`
  
 
 
