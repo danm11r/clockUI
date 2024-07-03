@@ -5,9 +5,17 @@ Smart clock UI for the Raspberry Pi built with Python and QtQuick.
 This app was built with Python and the PyQt5 toolkit. The UI is touch-based, and is intended to run on a Raspberry Pi connected to a round 1080x1080 LCD display. 
 
 The current version is only a proof of concept, but feel free to give it a try! The app has three clockfaces which can be accessed by swiping left or right on a touch screen, or by clicking and dragging accross the window. Each clock faces provides the current time, date, and basic weather information. I've also added a rudimentary settings page for switching between the two avaliable color schemes. 
-![clockdemo2](https://github.com/danm11r/QtClock/assets/148667664/27cdffc5-eb1d-4b7d-bb78-6f1c7303b4bc)
 
-# Installation 
+Default Clock Face:
+![clock](https://github.com/danm11r/clockUI/assets/148667664/d13ea8b6-3d19-4069-945c-f067455f6c32)
+
+Swiping through the clock faces and changing the color theme:
+![demo](https://github.com/danm11r/clockUI/assets/148667664/12a5754c-a3d8-415b-acb9-a50d10c60e34)
+
+# Setup 
+The app expects to find a `.env` file containing an open weather API key, zip code, and unit type. This information is used to generate the API request for temperature data. An example file, `.env-example`, is provided. Simply rename the file to `.env` and fill in the necessary data.
+
+# Installation on Raspberry Pi 
 Here's a brief overview of installing the app on a Raspberry Pi with Raspberry Pi OS Lite, and configuring it to run on startup without a display manager. The app has been tested on both a Pi B+ and a Pi 4. Performance on the B+ was poor when swiping between clockfaces, I recommend using something newer. 
 
 First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/clockUI`. 
