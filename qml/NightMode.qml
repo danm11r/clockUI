@@ -117,7 +117,7 @@ Item {
             if (currTemp.tempErr == 0) {
                 nightMode.state = ""
             }
-            else if (currTemp.tempErr == 1 || currTemp.tempErr == 2) {
+            else {
                 nightMode.state = "error"
             }
         }

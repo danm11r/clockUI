@@ -96,7 +96,7 @@ Item {
             if (currTemp.tempErr == 0) {
                 weatherWidget.state = ""
             }
-            else if (currTemp.tempErr == 1 || currTemp.tempErr == 2) {
+            else {
                 weatherWidget.state = "error"
             }
         }

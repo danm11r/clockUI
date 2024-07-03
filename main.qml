@@ -218,6 +218,12 @@ ApplicationWindow {
                     errorMsg.open()
                     showError = false
                 }
+                else if (tempErr == '3')
+                {
+                    errorText = "Unable to fetch weather data.\nCheck .env file!"
+                    errorMsg.open()
+                    showError = false
+                }
                 else {
                     showError: true
                 }
