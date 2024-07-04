@@ -41,7 +41,6 @@ ApplicationWindow {
 
     // Settings set 
     Settings {
-
         id: settings
 
         // Global color values. Overridden when theme selected from settings page
@@ -50,7 +49,8 @@ ApplicationWindow {
         property string color3: "#29663D"
         property string color4: "#112919"
         property string accent: "#CE2029"
-        property string bgcolor: "#2A2A2A"    
+        property string bgcolor: "#2A2A2A"   
+        property int selectedThemeIndex: 0
     }
 
     // Error message properties. The error message will eventually be moved to its own qml file
@@ -60,7 +60,7 @@ ApplicationWindow {
     SwipeView {
         id: view
         
-        currentIndex: 1
+        currentIndex: 2
         anchors.fill: parent
 
         Item {

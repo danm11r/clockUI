@@ -15,7 +15,7 @@ import calendar
 
 app = QGuiApplication(sys.argv)
 app.setOrganizationName("test")
-app.setOrganizationDomain("test")
+app.setOrganizationDomain("test.com")
 app.setApplicationName("test")
 
 mainFont = QFont("noto sans")

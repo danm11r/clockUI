@@ -1,6 +1,6 @@
 // DM Jan 2024
 // 
-// Settings page currently only allows changing color scheme
+// settings page currently only allows changing color scheme
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
@@ -50,12 +50,12 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 100
-        text: "Settings"
+        text: "settings"
         font.pixelSize: 80
         color: "white"   
     }  
 
-    // Use repeater to create theme color selection buttons. Color values are stored in arrays in Settings.qml
+    // Use repeater to create theme color selection buttons
     Row {
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -73,6 +73,7 @@ Item {
 
                 x: 200
                 y: clockRadius-100
+                state: (settings.selectedThemeIndex == index) ? 'clicked' : '' // Set button for selected theme to clicked state
 
                 width: buttonSize
                 height: buttonSize
@@ -87,64 +88,40 @@ Item {
                 }
 
                 Rectangle {
-
                     id: rect5
-
                     width: buttonSize; height: buttonSize
-                    
                     color: color3Array[index]
-
                     radius: 180
                 }
 
 
                 Rectangle {
-
                     id: rect4
-
                     y: buttonSize/2
-
                     width: buttonSize; height: 0
-                    
                     color: color3Array[index]
-
                 }
 
 
                 Rectangle {
-
                     id: rect3
-
                     width: buttonSize; height: buttonSize
-                    
                     color: color2Array[index]
-
                     radius: 180
-
                 }
 
                 Rectangle {
-
                     id: rect2
-
                     y: buttonSize/2
-
                     width: buttonSize; height: 0
-                    
                     color: color1Array[index]
-
                 }
 
                 Rectangle {
-
                     id: rect1
-
                     width: buttonSize; height: buttonSize
-                    
                     color: color1Array[index]
-
                     radius: 180
-
                 }
 
                 MouseArea {
@@ -152,6 +129,7 @@ Item {
                     onClicked: { 
                         colorButton.state = 'clicked'
                         resetButtons()
+                        settings.selectedThemeIndex = index
                         settings.color1 = color1Array[index]
                         settings.color2 = color2Array[index]
                         settings.color3 = color3Array[index]
