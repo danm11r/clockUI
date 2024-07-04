@@ -149,13 +149,13 @@ Item {
                 ]
 
                 transitions: Transition {
-                    NumberAnimation { target: rect1; property: "y"; duration: animationDelay }
-                    NumberAnimation { target: rect2; property: "height"; duration: animationDelay }
-                    NumberAnimation { target: rect2; property: "y"; duration: animationDelay }
-                    NumberAnimation { target: rect3; property: "radius"; duration: animationDelay }
-                    NumberAnimation { target: rect4; property: "height"; duration: animationDelay }
-                    NumberAnimation { target: rect4; property: "y"; duration: animationDelay }
-                    NumberAnimation { target: rect5; property: "y"; duration: animationDelay }
+                    NumberAnimation { target: rect1; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect2; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect2; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect3; property: "radius"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect4; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect4; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect5; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
                 }
             }
         }
