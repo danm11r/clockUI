@@ -6,7 +6,6 @@ import Qt.labs.settings 1.0
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Shapes 1.15
-import QtGraphicalEffects 1.12
 
 // Import theme directory for clock face and widgets
 import "./qml"

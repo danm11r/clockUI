@@ -7,8 +7,9 @@ import QtQuick.Shapes 1.15
 
 Item {
     
-    anchors.fill: parent
-
+    width: 1080
+    height: 1080
+    
     property int buttonSize: 150
     property int buttonGap: 50
     

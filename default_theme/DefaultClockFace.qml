@@ -7,16 +7,15 @@ import QtQuick 2.15
 
 Item {
 
-    property int bezelBorder: 10
     property int arcWidth: 18     
     property int arcGap: 9
     property int textSize: 120           
     property int widgetRadius: 190    
 
     BorderWidget {}
-    WeatherWidget { x: 340; y: 340 } 
-    TimeWidget { x: 740; y: 340 }
-    DateWidget { x: 740; y: 740 }
-    ClockWidget { x: 340; y: 740 }
+    WeatherWidget { x: 335; y: 335 } 
+    TimeWidget { x: 745; y: 335 }
+    DateWidget { x: 745; y: 745 }
+    ClockWidget { x: 335; y: 745 }
 
 }

@@ -15,13 +15,13 @@ Item {
 
         Rectangle {
             x: - arcWidth/2
-            y: - clockRadius + bezelBorder
+            y: - clockRadius
             width: arcWidth
             height: arcWidth
             radius: 180
             color: "#B4B4B4"
 
-            transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: index*6 } 
+            transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: index*6 } 
         }
     }
 
@@ -32,13 +32,13 @@ Item {
 
         Rectangle {
             x: - arcWidth/2
-            y: - clockRadius + bezelBorder
+            y: - clockRadius
             width: arcWidth
             height: arcWidth*2
             radius: 180
             color: "#B4B4B4"
 
-            transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: index*30 } 
+            transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: index*30 } 
         }
     }
 
@@ -53,7 +53,7 @@ Item {
 
             PathAngleArc {
                 centerX: 0; centerY: 0
-                radiusX: clockRadius - bezelBorder - arcWidth/2; radiusY: clockRadius - bezelBorder - arcWidth/2;
+                radiusX: clockRadius - arcWidth/2; radiusY: clockRadius - arcWidth/2;
                 startAngle: 255 //268
                 sweepAngle: 30  //4
             }
@@ -65,24 +65,24 @@ Item {
     // Hour arc edge pieces
     Rectangle {
         x: - arcWidth/2
-        y: - clockRadius + bezelBorder
+        y: - clockRadius
         width: arcWidth
         height: arcWidth*2
         radius: 180
         color: settings.color3
 
-        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: time.hour*30 } 
+        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: time.hour*30 } 
     }
 
     Rectangle {
         x: - arcWidth/2
-        y: - clockRadius + bezelBorder
+        y: - clockRadius
         width: arcWidth
         height: arcWidth*2
         radius: 180
         color: settings.color3
 
-        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: (time.hour+1)*30 } 
+        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: (time.hour+1)*30 } 
     }
 
     // Min arc
@@ -96,7 +96,7 @@ Item {
 
             PathAngleArc {
                 centerX: 0; centerY: 0
-                radiusX: clockRadius - bezelBorder - arcWidth/2; radiusY: clockRadius - bezelBorder - arcWidth/2;
+                radiusX: clockRadius - arcWidth/2; radiusY: clockRadius - arcWidth/2;
                 startAngle: 267 //268
                 sweepAngle: 6   //4
             }
@@ -108,35 +108,35 @@ Item {
     // Min arc edge pieces
     Rectangle {
         x: - arcWidth/2
-        y: - clockRadius + bezelBorder
+        y: - clockRadius
         width: arcWidth
         height: arcWidth*2
         radius: 180
         color: settings.color2
 
-        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: time.minute*6 } 
+        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: time.minute*6 } 
     }
 
     Rectangle {
         x: - arcWidth/2
-        y: - clockRadius + bezelBorder
+        y: - clockRadius
         width: arcWidth
         height: arcWidth*2
         radius: 180
         color: settings.color2
 
-        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: (time.minute+1)*6 } 
+        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: (time.minute+1)*6 } 
     }
 
     // Second mark
     Rectangle {
         x: - arcWidth/2
-        y: - clockRadius + bezelBorder
+        y: - clockRadius
         width: arcWidth
         height: arcWidth*2
         radius: 180
         color: settings.color1
 
-        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius - bezelBorder; angle: time.second*6 } 
+        transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: time.second*6 } 
     }
 }

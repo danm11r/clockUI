@@ -8,7 +8,8 @@ import QtQuick.Shapes 1.15
 
 Item {
 
-    anchors.fill: parent
+    width: 1080
+    height: 1080
 
     property int arcWidth: 18     
     property int arcGap: 9

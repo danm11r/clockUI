@@ -8,8 +8,9 @@ Item {
 
     id: nightMode
 
-    anchors.fill: parent
-
+    width: 1080
+    height: 1080
+    
     property string nightColor: "#CE2029"
     property int textSize: 300
 
