@@ -11,6 +11,7 @@ import QtQuick.Shapes 1.15
 import "./qml"
 import "./analog_theme"
 import "./default_theme"
+import "./simple_theme"
 
 ApplicationWindow {
     id: main
@@ -38,7 +39,6 @@ ApplicationWindow {
     property variant color3Array: ["#29663D", "#0E9994", "#990F5D", "#700F99"] // 60%
     property variant color4Array: ["#112919", "#042928", "#33051F", "#250533"] // 20%
 
-    // Settings set 
     Settings {
         id: settings
 
@@ -63,33 +63,23 @@ ApplicationWindow {
         anchors.fill: parent
 
         Item {
-            id: firstPage
-
             NightMode {}
         }
 
         Item {
-            id: secondPage
+            SimpleClockFace{}
+        }
 
+        Item {
             AnalogClockFace {}
         }
 
         Item {
-            id: thirdPage
-
             DefaultClockFace{}
         }
 
-        Item {
-            id: fourthPage
-            
+        Item {            
             SettingsPage {}
-        }
-
-        Item {
-            id: fifthPage
-
-            Test {}
         }
     }
 

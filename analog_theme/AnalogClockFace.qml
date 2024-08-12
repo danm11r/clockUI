@@ -1,7 +1,7 @@
 // DM Feb 2024
 // clockUI
 // 
-// This represents the clock face. Widgets are placed and positioned within 
+// Analog clock face
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
@@ -58,8 +58,7 @@ Item {
         target: backend
 
         function onTime() {
-            if ((time.hour >= 4 && time.hour <= 8) || time.hour >= 10 || time.hour <= 2)
-            {
+            if ((time.hour >= 4 && time.hour <= 8) || time.hour >= 10 || time.hour <= 2) {
                 date.state = "moved"
                 weather.state = "moved"
             }
