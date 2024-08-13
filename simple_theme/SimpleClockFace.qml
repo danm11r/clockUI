@@ -1,21 +1,21 @@
 // DM July 2024
 // clockUI
 // 
-// Simple clock face
+// Simple clock face coppied from dashUI
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
 
 Item {
 
-    id: analogClock
+    id: simpleClockFace
 
     width: 1080
     height: 1080
 
     property string hour
     property string minute
-    property int textSize: 200
+    property int textSize: 250
     property int clockRadius: height/2
 
     property int arcWidth: 24
@@ -49,38 +49,58 @@ Item {
         } 
     }
 
-    // Time and date text
-    Column {
-
+    // Time and date text        
+    Text {
+        id: timeText
         anchors.centerIn: parent
-        spacing: -30
-        
+        text: time.hour_text + ":" + time.minute_text
+        font.pixelSize: textSize
+        font.bold: true
+        color: "white"
+    }
+
+    // Date text
+    Row {
+
+        anchors.top: timeText.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: -textSize*(1/4)
+
+        // Dummy text used to determine proper font size for actual text below
         Text {
-            id: timeText
-            text: time.hour_text + ":" + time.minute_text
+            id: dummyText
+            visible: false
+            text: currDate.day.toUpperCase() + currDate.date
+            width: timeText.contentWidth*(.8)
+            fontSizeMode: Text.Fit
             font.pixelSize: textSize
+        }
+
+        Text {
+            text: currDate.day.toUpperCase()
+            font.pixelSize: dummyText.fontInfo.pixelSize
             font.bold: true
-            color: "white"
+            color: settings.color3
         }
 
-        Row {
-
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            Text {
-                text: currDate.day.toUpperCase() + " "
-                font.pixelSize: 140
-                font.bold: true
-                color: settings.color3
-            }
-
-
-            Text {
-                text: currDate.date
-                font.pixelSize: 140
-                color: settings.color1
-            }
+        Text {
+            text: currDate.date
+            font.pixelSize: dummyText.fontInfo.pixelSize
+            color: settings.color1
         }
+    }
+
+    // Weather text
+    Text {
+        id: weatherText
+
+        anchors.bottom: timeText.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: -textSize*(1/4)
+
+        text: currTemp.temp + "\u00B0"
+        font.pixelSize: dummyText.fontInfo.pixelSize
+        color: settings.color1
     }
 
     // Clock border
@@ -160,5 +180,43 @@ Item {
         radius: 180
         color: settings.accent
         transform: Rotation { origin.x: arcWidth/4; origin.y: clockRadius; angle: time.second*6} 
+    }
+
+    ErrorIcon {
+        id: errorIcon
+        visible: false
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: timeText.top
+        anchors.bottomMargin: -textSize*(1/4)
+        width: dummyText.fontInfo.pixelSize
+        height: dummyText.fontInfo.pixelSize
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: errorMsg.open()
+        }
+    }
+
+    states: [
+        State {
+            name: "error"
+            PropertyChanges { target: weatherText; visible: false }
+            PropertyChanges { target: errorIcon; visible: true }
+        }
+    ]
+
+    Connections {
+        target: backend
+        
+        function onTemp() {
+
+            // Determine the error state 
+            if (currTemp.tempErr == 0) {
+                simpleClockFace.state = ""
+            }
+            else {
+                simpleClockFace.state = "error"
+            }
+        }
     }
 }

@@ -43,7 +43,6 @@ Item {
 
 
         Text {
-            anchors.verticalCenter: parent.verticalCenter
             text: currDate.date
             font.pixelSize: dummyText.fontInfo.pixelSize
             color: "white"

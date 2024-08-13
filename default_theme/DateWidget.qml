@@ -51,12 +51,12 @@ Item {
             spacing: -50
 
             Text {
-                text: currDate.day.toUpperCase()
+                text: currDate.day
                 font.pixelSize: textSize
                 color: settings.color1
             }
             Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 text: currDate.date
                 font.pixelSize: textSize
