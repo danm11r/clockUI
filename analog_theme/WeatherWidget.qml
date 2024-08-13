@@ -6,6 +6,8 @@ import QtQuick.Shapes 1.15
 Item {
 
     id: weatherWidget
+
+    property int textSize: 105
     
     // Draw background circle
     Shape {
@@ -42,14 +44,14 @@ Item {
                 Text {
                     id: lowTemp
                     text: currTemp.tempL
-                    font.pixelSize: textSize*(0.42)
+                    font.pixelSize: textSize*(0.45)
                     font.bold: true
                     color: settings.color2
                 }  
 
                 Text {
                     text: currTemp.tempH
-                    font.pixelSize: textSize*(0.42)
+                    font.pixelSize: textSize*(0.45)
                     font.bold: true
                     color: settings.color1   
                 }  

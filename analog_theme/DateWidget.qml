@@ -4,23 +4,18 @@ import QtQuick 2.15
 import QtQuick.Shapes 1.15
 
 Item {
+
+    width: widgetRadius*2
+    height: widgetRadius*2
+
+    x: -widgetRadius
+    y: -widgetRadius
     
     // Draw background circle
-    Shape {
-
-        ShapePath {
-            fillColor: settings.color4
-            strokeColor: settings.color4   
-            strokeWidth: arcWidth
-            capStyle: ShapePath.RoundCap
-
-            PathAngleArc {
-                centerX: 0; centerY: 0
-                radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        } 
+    Rectangle {
+        anchors.fill: parent
+        color: settings.color4
+        radius: width/2
     }
 
     // Show date
@@ -28,17 +23,29 @@ Item {
 
         anchors.centerIn: parent
 
+        // Dummy text used to determine proper font size for actual text below
         Text {
+            id: dummyText
+            visible: false
+            text: currDate.day.toUpperCase() + currDate.date
+            width: widgetRadius*(8/5)
+            fontSizeMode: Text.Fit
+            font.pixelSize: widgetRadius*(0.625)
+        }
+
+        Text {
+            id: text
             text: currDate.day.toUpperCase()
-            font.pixelSize: 100
+            font.pixelSize: dummyText.fontInfo.pixelSize
             font.bold: true
             color: settings.color2
         }
 
 
         Text {
+            anchors.verticalCenter: parent.verticalCenter
             text: currDate.date
-            font.pixelSize: 100
+            font.pixelSize: dummyText.fontInfo.pixelSize
             color: "white"
         }
     }

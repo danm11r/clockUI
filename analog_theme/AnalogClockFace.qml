@@ -13,7 +13,6 @@ Item {
 
     property int arcWidth: 18     
     property int arcGap: 9
-    property int textSize: 100
     property int widgetRadius: 160
 
     // Date widget that moves if clock hands overlap 
