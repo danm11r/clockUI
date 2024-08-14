@@ -217,6 +217,12 @@ ApplicationWindow {
                     showError: true
                 }
             }
+
+            // Close out any open error messages once connection resumed
+            if (tempErr == '0')
+            {
+                errorMsg.close()
+            }
         }   
     }
 }

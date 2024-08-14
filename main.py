@@ -41,13 +41,13 @@ class Backend(QObject):
         self.timer1.timeout.connect(self.update_time)
         self.timer1.start()
 
-        #1s timer for date update. Eventually, this should only happen every 24 hours...
+        #1s timer for date update
         self.timer2 = QTimer()
         self.timer2.setInterval(1000)
         self.timer2.timeout.connect(self.update_date)
         self.timer2.start()
 
-        #1m timer for date update. Eventually, this should only happen every 24 hours...
+        #1m timer for weather update. Runs once a minute
         self.timer3 = QTimer()
         self.timer3.setInterval(60000)
         self.timer3.timeout.connect(self.update_temp)
