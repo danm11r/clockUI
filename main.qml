@@ -34,10 +34,10 @@ ApplicationWindow {
     property int animationDelay: 200
 
     // Color themes
-    property variant color1Array: ["#50C878", "#15F4EE", "#F21894", "#A817E6"] // 90%
-    property variant color2Array: ["#3C965A", "#11BFB9", "#BF1375", "#8C13BF"] // 75%
-    property variant color3Array: ["#29663D", "#0E9994", "#990F5D", "#700F99"] // 60%
-    property variant color4Array: ["#112919", "#042928", "#33051F", "#250533"] // 20%
+    property variant color1Array: ["#50C878", "#15F4EE", "#F21894", "#A817E6"]//"#E6B217"] // 90%
+    property variant color2Array: ["#3C965A", "#11BFB9", "#BF1375", "#8C13BF"]//, "#BF9413"] // 75%
+    property variant color3Array: ["#29663D", "#0E9994", "#990F5D", "#700F99"]//, "#99770F"] // 60%
+    property variant color4Array: ["#112919", "#042928", "#33051F", "#250533"]//, "#332805"] // 20%
 
     Settings {
         id: settings

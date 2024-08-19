@@ -92,7 +92,7 @@ Item {
         radius: 180
         color: settings.color2
 
-        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-100; angle: time.hour*30 + 180 } 
+        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-100; angle: time.hour*30 + 180 + time.minute*(1/2) } 
     }
 
     Rectangle {
@@ -103,7 +103,7 @@ Item {
         radius: 180
         color: settings.color2
 
-        transform: Rotation { origin.x: arcWidth/4; origin.y: arcWidth/4; angle: time.hour*30 + 180 } 
+        transform: Rotation { origin.x: arcWidth/4; origin.y: arcWidth/4; angle: time.hour*30 + 180 + time.minute*(1/2) } 
     }
 
     // second hand

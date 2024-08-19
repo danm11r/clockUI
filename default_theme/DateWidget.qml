@@ -7,20 +7,14 @@ Item {
 
     property int datePos: 0
 
-    Shape {
-        ShapePath {
-            fillColor: "#2A2A2A"
-            strokeColor: "#2A2A2A"   
-            strokeWidth: arcWidth
-            capStyle: ShapePath.RoundCap
-
-            PathAngleArc {
-                centerX: 0; centerY: 0
-                radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        } 
+    // Draw background circle
+    Rectangle {
+        x: -widgetRadius
+        y: -widgetRadius
+        height: widgetRadius*2
+        width: widgetRadius*2
+        color: settings.bgcolor
+        radius: width/2
     }
 
     Shape {
