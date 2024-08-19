@@ -154,28 +154,57 @@ ApplicationWindow {
             horizontalAlignment: Text.AlignHCenter
         }
 
-        Button {
+        Row {
+
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 24
 
-            contentItem: Text {
-                text: "Accept"
-                font.pixelSize: 48
-                color: "white"
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            
-            background: Rectangle {
-                implicitHeight: 100
-                implicitWidth: 200
-                color: settings.color2
-                radius: 45
+            spacing: 20
+
+            Button {
+
+                contentItem: Text {
+                    text: "Accept"
+                    font.pixelSize: 48
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                
+                background: Rectangle {
+                    implicitHeight: 100
+                    implicitWidth: 200
+                    color: settings.color2
+                    radius: 45
+                }
+
+                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+                onClicked: errorMsg.accept()
             }
 
-            DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-            onClicked: errorMsg.accept()
+            Button {
+                contentItem: Text {
+                    text: "Retry"
+                    font.pixelSize: 48
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                
+                background: Rectangle {
+                    implicitHeight: 100
+                    implicitWidth: 200
+                    color: settings.color2
+                    radius: 45
+                }
+
+                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+                onClicked: {
+                    backend.update_temp()
+                    errorMsg.accept()
+                }
+            }
         }
     }
 

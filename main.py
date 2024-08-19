@@ -6,7 +6,7 @@ import random
 
 from PyQt5.QtGui import QGuiApplication, QFont
 from PyQt5.QtQml import QQmlApplicationEngine
-from PyQt5.QtCore import QTimer, QObject, pyqtSignal
+from PyQt5.QtCore import QTimer, QObject, pyqtSignal, pyqtSlot
 
 from time import strftime, localtime
 from datetime import datetime
@@ -71,6 +71,7 @@ class Backend(QObject):
 
         self.date.emit(day, date, totalDays)
 
+    @pyqtSlot()
     def update_temp(self):
         temp = get_curr_temp()
 
