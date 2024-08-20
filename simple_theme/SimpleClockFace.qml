@@ -15,7 +15,7 @@ Item {
 
     property string hour
     property string minute
-    property int textSize: 250
+    property int textSize: 220
     property int clockRadius: height/2
 
     property int arcWidth: 24

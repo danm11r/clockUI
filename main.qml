@@ -84,6 +84,7 @@ ApplicationWindow {
     }
 
     Text {
+        visible: false
         anchors {
             bottom: parent.bottom
             bottomMargin: 12
@@ -96,6 +97,7 @@ ApplicationWindow {
     }
 
     Text {
+        visible: false
         anchors {
             top: parent.top
             topMargin: 12
@@ -212,7 +214,7 @@ ApplicationWindow {
         target: backend
 
         function onTime (hour, minute, second, hour_text, minute_text, PM) {
-            time = {'hour': hour, 'minute': minute, 'second': second, 'hour_text': hour_text, 'minute_text': minute_text, 'PM': PM};
+            time = {'hour': hour, 'minute': minute, 'second': second, 'hour_text': hour_text, 'minute_text': minute_text, 'PM': PM}
         }
 
         function onDate (day, date, totalDays) {
