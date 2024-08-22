@@ -21,7 +21,7 @@ Here's a brief overview of installing the app on a Raspberry Pi with Raspberry P
 First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/clockUI`.
 
 Then install python and the necessary PyQt5 packages with the following command:
-`sudo apt-get install python3 python3.pyqt5 python3-pyqt5.qtquick qml-module-qtquick-shapes qml-module-qtquick-controls2`
+`sudo apt-get install python3 python3.pyqt5 python3-pyqt5.qtquick qml-module-qtquick-shapes qml-module-qtquick-controls2 dotenv`
 
 The included clockfaces use the noto sans font family, install it with the following command: `sudo apt-get install fonts-noto`
 
