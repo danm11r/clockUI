@@ -41,14 +41,7 @@ Item {
                 centerX: 0; centerY: 0
                 radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
                 startAngle: 90
-                sweepAngle: tempPos
-
-                Behavior on sweepAngle {
-                    SmoothedAnimation { 
-                        velocity: 30 
-                        duration: 250
-                    }
-                } 
+                sweepAngle: tempPos 
             }                
 
             PathAngleArc {
@@ -56,13 +49,6 @@ Item {
                 radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
                 startAngle: 90 
                 sweepAngle: -tempPos
-
-                Behavior on sweepAngle {
-                    SmoothedAnimation { 
-                        velocity: 10 
-                        duration: 250
-                    }
-                } 
             }      
         } 
     }
@@ -132,6 +118,22 @@ Item {
             PropertyChanges { target: errorIcon; visible: true }
         }
     ]
+
+    Component.onCompleted: {
+        if (currTemp.tempH != currTemp.tempL) {
+            tempPos = (((currTemp.temp - currTemp.tempL) * (179)) / (currTemp.tempH - currTemp.tempL))
+        }
+        else {
+            tempPos = 180
+        }
+
+        if (currTemp.tempErr == 0) {
+            weatherWidget.state = ""
+        }
+        else {
+            weatherWidget.state = "error"
+        }
+    }
 
     Connections {
         target: backend

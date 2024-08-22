@@ -89,6 +89,15 @@ Item {
         }
     ]
 
+    Component.onCompleted: {
+        if (currTemp.tempErr == 0) {
+            weatherWidget.state = ""
+        }
+        else {
+            weatherWidget.state = "error"
+        }
+    }
+
     Connections {
         target: backend
         

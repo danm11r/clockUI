@@ -30,13 +30,6 @@ Item {
                 radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
                 startAngle: 270
                 sweepAngle: datePos
-
-                Behavior on sweepAngle {
-                    SmoothedAnimation { 
-                        velocity: 30 
-                        duration: 250
-                    }
-                } 
             }
         }
 
@@ -57,26 +50,10 @@ Item {
                 color: "white"   
             }
         }
-
-        /*
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.verticalCenter
-            anchors.topMargin: -20
-            text: currDate.date
-            font.pixelSize: textSize  //44
-            color: "white"   
-        }  
-
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.verticalCenter
-            anchors.bottomMargin: -20
-            text: currDate.day.toUpperCase()
-            font.pixelSize: textSize  //38
-            color: settings.color1
-        }  
-        */
+    }
+    
+    Component.onCompleted: {
+        datePos = currDate.date*360 / currDate.totalDays
     }
 
     Connections {

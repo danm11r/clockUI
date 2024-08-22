@@ -58,28 +58,35 @@ ApplicationWindow {
 
     SwipeView {
         id: view
+
+        width: clockRadius*2
+        height: clockRadius*2
         
         currentIndex: 2
-        anchors.fill: parent
 
-        Item {
-            NightMode {}
+        Loader {
+            active: SwipeView.isCurrentItem
+            sourceComponent: NightMode {}
         }
 
-        Item {
-            SimpleClockFace{}
+        Loader {
+            active: SwipeView.isCurrentItem
+            sourceComponent: SimpleClockFace{}
         }
 
-        Item {
-            AnalogClockFace {}
+        Loader {
+            active: SwipeView.isCurrentItem
+            sourceComponent: AnalogClockFace {}
         }
 
-        Item {
-            DefaultClockFace{}
+        Loader {
+            active: SwipeView.isCurrentItem
+            sourceComponent: DefaultClockFace{}
         }
 
-        Item {            
-            SettingsPage {}
+        Loader {    
+            active: SwipeView.isCurrentItem        
+            sourceComponent: SettingsPage {}
         }
     }
 

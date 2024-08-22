@@ -109,6 +109,15 @@ Item {
         }
     ]
 
+    Component.onCompleted: {
+        if (currTemp.tempErr == 0) {
+            nightMode.state = ""
+        }
+        else {
+            nightMode.state = "error"
+        }
+    }
+
     Connections {
         target: backend
         

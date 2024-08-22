@@ -205,6 +205,16 @@ Item {
         }
     ]
 
+    Component.onCompleted: {
+        // Determine the error state 
+        if (currTemp.tempErr == 0) {
+            simpleClockFace.state = ""
+        }
+        else {
+            simpleClockFace.state = "error"
+        }
+    }
+
     Connections {
         target: backend
         
