@@ -82,11 +82,11 @@ Item {
 
         Row {
 
-            spacing: 10
+            spacing: widgetRadius*(1/19)
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: mainText.bottom
-            anchors.topMargin: -30
+            anchors.topMargin: -widgetRadius*(3/19)
 
             Text {
                 id: lowTemp
@@ -116,8 +116,8 @@ Item {
         id: errorIcon
         visible: false
         anchors.centerIn: parent
-        width: 150
-        height: 150
+        width: widgetRadius*(15/19)
+        height: widgetRadius*(15/19)
 
         MouseArea {
             anchors.fill: parent

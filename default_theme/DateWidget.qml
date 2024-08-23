@@ -42,7 +42,7 @@ Item {
 
         Column {
             anchors.centerIn: parent
-            spacing: -50
+            spacing: -widgetRadius*(5/19)
 
             Text {
                 text: currDate.day
@@ -57,26 +57,6 @@ Item {
                 color: "white"   
             }
         }
-
-        /*
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.verticalCenter
-            anchors.topMargin: -20
-            text: currDate.date
-            font.pixelSize: textSize  //44
-            color: "white"   
-        }  
-
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.verticalCenter
-            anchors.bottomMargin: -20
-            text: currDate.day.toUpperCase()
-            font.pixelSize: textSize  //38
-            color: settings.color1
-        }  
-        */
     }
 
     Connections {

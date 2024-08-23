@@ -8,26 +8,25 @@ import QtQuick.Shapes 1.15
 
 Item {
 
-    width: 1080
-    height: 1080
+    anchors.fill: parent
 
-    property int arcWidth: 18     
-    property int arcGap: 9
-    property int widgetRadius: 160
+    property int arcWidth: clockRadius*(1/30)
+    property int arcGap: clockRadius*(1/60)
+    property int widgetRadius: clockRadius*(8/27)
 
     // Date widget that moves if clock hands overlap 
     Item {
         id: date
 
-        x: 540
-        y: 750
+        x: clockRadius
+        y: clockRadius*(25/18)
 
         DateWidget{}
 
         states: [
             State {
                 name: "moved"
-                PropertyChanges {target: date; x: 750; y: 540}
+                PropertyChanges {target: date; x: clockRadius*(25/18); y: clockRadius}
             }
         ]
     }
@@ -37,15 +36,15 @@ Item {
     Item {
         id: weather
 
-        x: 540
-        y: 330
+        x: clockRadius
+        y: clockRadius*(11/18)
 
         WeatherWidget{}
 
         states: [
             State {
                 name: "moved"
-                PropertyChanges {target: weather; x: 330; y: 540}
+                PropertyChanges {target: weather; x: clockRadius*(11/18); y: clockRadius}
             }
         ]
     }

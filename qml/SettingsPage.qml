@@ -7,11 +7,12 @@ import QtQuick.Shapes 1.15
 
 Item {
     
-    width: 1080
-    height: 1080
+    anchors.fill: parent
+
+    property int arcWidth: clockRadius*(1/30)
     
-    property int buttonSize: 150
-    property int buttonGap: 50
+    property int buttonSize: clockRadius*(5/18)
+    property int buttonGap: clockRadius*(5/54)
     
     // Draw background circle
     Shape {
@@ -50,9 +51,9 @@ Item {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 100
+        anchors.topMargin: clockRadius*(5/27)
         text: "settings"
-        font.pixelSize: 80
+        font.pixelSize: clockRadius*(4/27)
         color: "white"   
     }  
 
@@ -72,8 +73,8 @@ Item {
 
                 id: colorButton
 
-                x: 200
-                y: clockRadius-100
+                x: clockRadius*(10/27)
+                y: clockRadius-clockRadius*(5/27)
                 state: (settings.selectedThemeIndex == index) ? 'clicked' : '' // Set button for selected theme to clicked state
 
                 width: buttonSize

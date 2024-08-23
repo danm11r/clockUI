@@ -29,8 +29,7 @@ ApplicationWindow {
     property var currTemp: {'temp': 0, 'tempL': 0, 'tempH': 0, 'tempErr': 0 }
     
     // General clock face settings
-    property int clockRadius: 540
-    property int arcWidth: 18
+    property int clockRadius: 120
     property int animationDelay: 200
 
     // Color themes
@@ -58,9 +57,11 @@ ApplicationWindow {
 
     SwipeView {
         id: view
+
+        height: clockRadius*2
+        width: clockRadius*2
         
         currentIndex: 2
-        anchors.fill: parent
 
         Item {
             NightMode {}

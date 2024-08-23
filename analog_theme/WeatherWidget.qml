@@ -7,24 +7,16 @@ Item {
 
     id: weatherWidget
 
-    property int textSize: 105
+    property int textSize: widgetRadius*(21/32)
     
     // Draw background circle
-    Shape {
-
-        ShapePath {
-            fillColor: settings.color4
-            strokeColor: settings.color4   
-            strokeWidth: arcWidth
-            capStyle: ShapePath.RoundCap
-
-            PathAngleArc {
-                centerX: 0; centerY: 0
-                radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        } 
+    Rectangle {
+        x: -widgetRadius
+        y: -widgetRadius
+        height: widgetRadius*2
+        width: widgetRadius*2
+        color: settings.color4
+        radius: width/2
     }
 
     Item {
@@ -39,7 +31,7 @@ Item {
 
                 anchors.verticalCenter: parent.verticalCenter
 
-                spacing: -20
+                spacing: -widgetRadius*(1/8)
 
                 Text {
                     id: lowTemp
@@ -72,8 +64,8 @@ Item {
         id: errorIcon
         visible: false
         anchors.centerIn: parent
-        width: 150
-        height: 150
+        width: widgetRadius*(15/16)
+        height: widgetRadius*(15/16)
 
         MouseArea {
             anchors.fill: parent
