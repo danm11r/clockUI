@@ -72,7 +72,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.verticalCenter
             anchors.bottomMargin: -20
-            text: currDate.day.toUpperCase()
+            text: currDate.day //.toUpperCase()
             font.pixelSize: textSize  //38
             color: settings.color1
         }  
