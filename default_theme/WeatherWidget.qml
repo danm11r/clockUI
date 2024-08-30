@@ -42,13 +42,6 @@ Item {
                 radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
                 startAngle: 90
                 sweepAngle: tempPos
-
-                Behavior on sweepAngle {
-                    SmoothedAnimation { 
-                        velocity: 30 
-                        duration: 250
-                    }
-                } 
             }                
 
             PathAngleArc {
@@ -56,13 +49,6 @@ Item {
                 radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
                 startAngle: 90 
                 sweepAngle: -tempPos
-
-                Behavior on sweepAngle {
-                    SmoothedAnimation { 
-                        velocity: 10 
-                        duration: 250
-                    }
-                } 
             }      
         } 
     }
@@ -75,7 +61,7 @@ Item {
         Text {
             id: mainText
             anchors.centerIn: parent
-            text: currTemp.temp + "\u00B0" + "F"
+            text: metric ? currTemp.temp + "\u00B0" + "C" : currTemp.temp + "\u00B0" + "F" 
             font.pixelSize: textSize
             color: "white"   
         }  

@@ -32,6 +32,7 @@ ApplicationWindow {
     property int clockRadius: 540
     property int arcWidth: 18
     property int animationDelay: 200
+    property bool metric: false
 
     // Color themes
     property variant color1Array: ["#50C878", "#15F4EE", "#F21894", "#A817E6"]//"#E6B217"] // 90%
