@@ -1,5 +1,5 @@
 // DM Feb 2024
-// QtClock
+// clockUI
 // 
 // This represents the analog clock face. Widgets are placed and positioned within 
 
@@ -9,6 +9,7 @@ import QtQuick.Shapes 1.15
 Item {
 
     anchors.fill: parent
+    property int textSize: clockRadius*(5/27)
 
     // border
     Repeater {
@@ -48,13 +49,13 @@ Item {
         model: 12
 
         Item {
-            x: parent.height/2 + Math.round(440*Math.cos((index*30-60)* Math.PI / 180))
-            y: parent.height/2 + Math.round(440*Math.sin((index*30-60)* Math.PI / 180))
+            x: parent.height/2 + Math.round(clockRadius*(22/27)*Math.cos((index*30-60)* Math.PI / 180))
+            y: parent.height/2 + Math.round(clockRadius*(22/27)*Math.sin((index*30-60)* Math.PI / 180))
             
             Text {
                 anchors.centerIn: parent
                 text: index+1
-                font.pixelSize: 100
+                font.pixelSize: textSize
                 color: "white"
             }
         }
@@ -65,7 +66,7 @@ Item {
         x: clockRadius-arcWidth/4
         y: clockRadius-arcWidth/4
         width: arcWidth/2
-        height: 100
+        height: clockRadius*(5/27)
         radius: 180
         color: settings.color1
 
@@ -74,32 +75,32 @@ Item {
 
     Rectangle {
         x: clockRadius-arcWidth
-        y: clockRadius-arcWidth + 100
+        y: clockRadius-arcWidth + clockRadius*(5/27)
         width: arcWidth*2
-        height: clockRadius-120
+        height: clockRadius-clockRadius*(2/9)
         radius: 180
         color: settings.color1
 
-        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-100; angle: time.minute*6 + 180 } 
+        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-clockRadius*(5/27); angle: time.minute*6 + 180 } 
     }
 
     // hour hand
     Rectangle {
         x: clockRadius-arcWidth
-        y: clockRadius-arcWidth + 100
+        y: clockRadius-arcWidth + clockRadius*(5/27)
         width: arcWidth*2
-        height: clockRadius-330
+        height: clockRadius-clockRadius*(11/18)
         radius: 180
         color: settings.color2
 
-        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-100; angle: time.hour*30 + 180 + time.minute*(1/2) } 
+        transform: Rotation { origin.x: arcWidth; origin.y: arcWidth-clockRadius*(5/27); angle: time.hour*30 + 180 + time.minute*(1/2) } 
     }
 
     Rectangle {
         x: clockRadius-arcWidth/4
         y: clockRadius-arcWidth/4
         width: arcWidth/2
-        height: 100
+        height: clockRadius*(5/27)
         radius: 180
         color: settings.color2
 
@@ -127,11 +128,10 @@ Item {
 
             PathAngleArc {
                 centerX: clockRadius; centerY: clockRadius
-                radiusX: 4; radiusY: 4;
+                radiusX: arcWidth*(2/9); radiusY: arcWidth*(2/9);
                 startAngle: 0
                 sweepAngle: 360
             }
         } 
     }
-
 }

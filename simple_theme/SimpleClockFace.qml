@@ -10,15 +10,13 @@ Item {
 
     id: simpleClockFace
 
-    width: 1080
-    height: 1080
+    height: clockRadius*2
+    width: clockRadius*2
 
     property string hour
     property string minute
-    property int textSize: 220
-    property int clockRadius: height/2
-
-    property int arcWidth: 24
+    property int textSize: clockRadius*(11/27)
+    property int arcWidth: clockRadius*(2/45)
 
     // Draw background gradient
     Shape {

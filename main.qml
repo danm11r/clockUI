@@ -29,9 +29,9 @@ ApplicationWindow {
     property var currTemp: {'temp': 0, 'tempL': 0, 'tempH': 0, 'tempErr': 0 }
     
     // General clock face settings
-    property int clockRadius: 540
-    property int arcWidth: 18
+    property int clockRadius: height/2
     property int animationDelay: 200
+    property int arcWidth: clockRadius*(1/30)
     property bool metric: false
 
     // Color themes
@@ -56,12 +56,15 @@ ApplicationWindow {
     // Error message properties. The error message will eventually be moved to its own qml file
     property bool showError: true
     property string errorText: ""
+    property int errorTextSize: clockRadius*(4/45)
 
     SwipeView {
         id: view
         
         currentIndex: 2
-        anchors.fill: parent
+        
+        height: parent.height
+        width: parent.width
 
         Item {
             NightMode {}
@@ -116,25 +119,25 @@ ApplicationWindow {
         id: errorMsg
 
         anchors.centerIn: parent
-        height: 540
-        width: 540
+        height: clockRadius
+        width: clockRadius
 
         header: ToolBar {
             Rectangle {
-                y: 50
-                height: 50
-                width: 540
+                y: clockRadius*(5/54)
+                height: clockRadius*(5/54)
+                width: clockRadius
                 color: settings.color2
             }
             Label {
                 text: "Weather Error"
                 color: "white"
-                font.pixelSize: 54
+                font.pixelSize: clockRadius*(1/10)
                 anchors.centerIn: parent
             }
             background: Rectangle {
 
-                implicitHeight: 100
+                implicitHeight: clockRadius*(5/27)
                 color: settings.color2
                 radius: 90
             }
@@ -144,16 +147,16 @@ ApplicationWindow {
             color: "#2A2A2A"
             border.color: settings.color2
             border.width: arcWidth
-            radius: 45
+            radius: clockRadius*(1/12)
         }
 
         contentItem: Text {
-            width: 540
+            width: clockRadius
             wrapMode: Text.WordWrap
             text: errorText
-            font.pixelSize: 48
+            font.pixelSize: errorTextSize
             color: "white"
-            leftPadding: 24
+            leftPadding: clockRadius*(2/45)
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -161,23 +164,23 @@ ApplicationWindow {
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 24
+            anchors.bottomMargin: clockRadius*(2/45)
 
-            spacing: 20
+            spacing: clockRadius*(1/27)
 
             Button {
 
                 contentItem: Text {
                     text: "Accept"
-                    font.pixelSize: 48
+                    font.pixelSize: errorTextSize
                     color: "white"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
                 
                 background: Rectangle {
-                    implicitHeight: 100
-                    implicitWidth: 200
+                    implicitHeight: clockRadius*(5/27)
+                    implicitWidth: clockRadius*(10/27)
                     color: settings.color2
                     radius: 45
                 }
@@ -189,15 +192,15 @@ ApplicationWindow {
             Button {
                 contentItem: Text {
                     text: "Retry"
-                    font.pixelSize: 48
+                    font.pixelSize: errorTextSize
                     color: "white"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
                 
                 background: Rectangle {
-                    implicitHeight: 100
-                    implicitWidth: 200
+                    implicitHeight: clockRadius*(5/27)
+                    implicitWidth: clockRadius*(10/27)
                     color: settings.color2
                     radius: 45
                 }

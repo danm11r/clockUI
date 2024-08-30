@@ -35,7 +35,7 @@ Item {
 
         Column {
             anchors.centerIn: parent
-            spacing: -50
+            spacing: -widgetRadius*(5/19)
 
             Text {
                 text: currDate.day
@@ -58,6 +58,7 @@ Item {
         function onDate() {
 
             datePos = currDate.date*360 / currDate.totalDays
+
         }
     }   
 }

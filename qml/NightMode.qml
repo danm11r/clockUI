@@ -8,11 +8,11 @@ Item {
 
     id: nightMode
 
-    width: 1080
-    height: 1080
+    height: clockRadius*2
+    width: clockRadius*2
     
     property string nightColor: "#CE2029"
-    property int textSize: 300
+    property int textSize: clockRadius*(5/9)
 
     // Time and PM display
     Row {
@@ -54,7 +54,7 @@ Item {
             visible: time.PM
             anchors.verticalCenter: colon.verticalCenter
             text: "PM"
-            font.pixelSize: 100
+            font.pixelSize: textSize*(1/3)
             color: nightColor 
         }  
 
@@ -72,7 +72,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: text.bottom
         text: currDate.day.toUpperCase() + " " + currDate.date
-        font.pixelSize: 150
+        font.pixelSize: textSize*(1/2)
         color: nightColor 
     }
 
@@ -83,7 +83,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: text.top
         text: currTemp.temp + "\u00B0"
-        font.pixelSize: 150
+        font.pixelSize: textSize*(1/2)
         color: nightColor 
     } 
 
@@ -92,8 +92,8 @@ Item {
         visible: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: text.top
-        width: 150
-        height: 150
+        width: textSize*(1/2)
+        height: textSize*(1/2)
 
         MouseArea {
             anchors.fill: parent
