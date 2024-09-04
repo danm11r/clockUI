@@ -16,16 +16,13 @@ Swiping through the clock faces and changing the color theme:
 The app expects to find a `.env` file containing an open weather API key, zip code, and unit type. This information is used to generate the API request for temperature data. An example file, `.env-example`, is provided. Simply rename the file to `.env` and fill in the necessary data.
 
 # Installation on Raspberry Pi
-Here's a brief overview of installing the app on a Raspberry Pi with Raspberry Pi OS Lite, and configuring it to run on startup without a display manager. The app has been tested on both a Pi B+ and a Pi 4. Performance on the B+ was poor when swiping between clockfaces, I recommend using something newer.
+Here's a brief overview of installing the app on a Raspberry Pi with Raspberry Pi OS Lite, and running it without a display manager. The app has been tested on both a Pi B+ and a Pi 4. Performance on the B+ was poor when swiping between clockfaces, I recommend using something newer.
 
 First, SSH into the Raspberry Pi, install git with `apt install git`, and clone the repo with `git clone https://github.com/danm11r/clockUI`.
 
-Then install python and the necessary PyQt5 packages with the following command:
-`sudo apt-get install python3 python3.pyqt5 python3-pyqt5.qtquick qml-module-qtquick-shapes qml-module-qtquick-controls2 python3-dotenv`
+Then install Python and the necessary PyQt5 packages using the included install script. To run this script, make it executable with `chmod +x install.sh` and execute with `./install.sh`
 
-The included clockfaces use the noto sans font family, install it with the following command: `sudo apt-get install fonts-noto`
-
-You should now be able to run the app. From the clockUI directory, run the following command to launch the app using the openGL renderer, bypassing the need for a display server: `python3 main.py --platform eglfs`
+You should now be able to run the app. From the clockUI directory, run the following command to launch the app using the openGL renderer, bypassing the need for a display server: `python3 main.py --platform eglfs`.
 
 
 
