@@ -1,5 +1,5 @@
 // Daniel Miller Jan 2024
-// QtClock
+// ClockUI
 // main.py stores global properties and imports clockfaces
 
 import Qt.labs.settings 1.0
@@ -60,6 +60,8 @@ ApplicationWindow {
 
     SwipeView {
         id: view
+
+        visible: true
         
         currentIndex: 2
         

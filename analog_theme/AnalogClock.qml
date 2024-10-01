@@ -1,7 +1,5 @@
 // DM Feb 2024
 // clockUI
-// 
-// This represents the analog clock face. Widgets are placed and positioned within 
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15

@@ -7,6 +7,9 @@ import QtQuick 2.15
 
 Item {
 
+    height: clockRadius*2
+    width: clockRadius*2
+
     property int arcWidth: clockRadius*(1/30)
     property int arcGap: clockRadius*(1/60)
     property int textSize: clockRadius*(2/9)
