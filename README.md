@@ -13,6 +13,11 @@ Swiping through the clock faces and changing the color theme:
 # Hardware
 While not required, I recommend using ClockUI with a round display, as the UI was designed specifically with that formfactor in mind. There are a few different options on the market, I used a 5" 1080x1080 display from Waveshare that can be purchased on Amazon. Any screen resolution should work, the UI is designed to scale entirely from the main window resolution. If you launch ClockUI using the eglfs method below, it should scale up to the horizontal resolution of your display. 
 
+# Todo
+- Add additional clockfaces
+- Add toggle to settings page for choosing between 12hr/24hr time
+- Add toggle to settings page for choosing between metric and imperial units
+
 # Setup
 The app expects to find a `.env` file containing an open weather API key, zip code, and unit type. This information is used to generate the API request for temperature data. An example file, `.env-example`, is provided. Simply rename the file to `.env` and fill in the necessary data.
 
