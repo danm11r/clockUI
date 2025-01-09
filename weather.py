@@ -11,9 +11,10 @@
 # 3 - unable to generate API request
 
 import requests, os
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv, dotenv_values, set_key
 
-load_dotenv()
+dotenv_path = ".env"
+load_dotenv(dotenv_path)
 
 def get_curr_temp():
 
@@ -63,4 +64,16 @@ def get_curr_temp():
 
     return [temp, temp_min, temp_max, metric, err]
 
-get_curr_temp()
+def update_env(metric):
+
+    err = 0
+
+    if metric == True:
+        set_key(dotenv_path, "UNITS", "metric")
+    elif metric == False:
+        set_key(dotenv_path, "UNITS", "imperial")
+    else:
+        print("Unable to update units in .env - missing .env file?")
+        err = 1
+
+    return err
