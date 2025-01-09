@@ -26,13 +26,12 @@ ApplicationWindow {
     property QtObject backend
     property var time: {'hour': 0, 'minute': 0, 'second': 0, 'hour_text': "0", 'minute_text': "0", 'PM': false } // This shares the same name as the signal and should probably be changed to something else
     property var currDate: {'day': "-", 'date': 0, 'totalDays': 0 }
-    property var currTemp: {'temp': 0, 'tempL': 0, 'tempH': 0, 'tempErr': 0 }
+    property var currTemp: {'temp': 0, 'tempL': 0, 'tempH': 0, 'metric': false, 'tempErr': 0 }
     
     // General clock face settings
     property int clockRadius: height/2
     property int animationDelay: 200
     property int arcWidth: clockRadius*(1/30)
-    property bool metric: false
 
     // Color themes
     property variant color1Array: ["#50C878", "#15F4EE", "#F21894", "#A817E6"]//"#E6B217"] // 90%
@@ -228,8 +227,8 @@ ApplicationWindow {
             currDate = {'day': day, 'date': date, 'totalDays': totalDays}
         }
 
-        function onTemp(temp, tempL, tempH, tempErr) {
-            currTemp = {'temp': temp, 'tempL': tempL, 'tempH': tempH, 'tempErr': tempErr}
+        function onTemp(temp, tempL, tempH, metric, tempErr) {
+            currTemp = {'temp': temp, 'tempL': tempL, 'tempH': tempH, 'metric': metric, 'tempErr': tempErr}
 
             // Only show the error message once upon API error instead of each time an API call is attempted
             if (showError) {

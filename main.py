@@ -30,7 +30,7 @@ class Backend(QObject):
     #Signal for all time data
     time = pyqtSignal(int, int, int, str, str, bool, arguments=['hour', 'minute', 'second', 'hour_text', 'minute_text', 'PM'])
     date = pyqtSignal(str, int, int, arguments=['day', 'date', 'totalDays'])
-    temp = pyqtSignal(int, int, int, int, arguments=['temp', 'tempL', 'tempH', 'tempErr'])
+    temp = pyqtSignal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
 
     def __init__(self):
         super().__init__()
@@ -75,7 +75,7 @@ class Backend(QObject):
     def update_temp(self):
         temp = get_curr_temp()
 
-        self.temp.emit(round(temp[0]), (round(temp[1])), round(temp[2]), temp[3])
+        self.temp.emit(round(temp[0]), (round(temp[1])), round(temp[2]), temp[3], temp[4])
 
 
 backend = Backend()

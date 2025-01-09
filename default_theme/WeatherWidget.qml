@@ -61,7 +61,7 @@ Item {
         Text {
             id: mainText
             anchors.centerIn: parent
-            text: currTemp.temp + "\u00B0" + "F"
+            text: currTemp.temp + "\u00B0" + (currTemp.metric ? "C" : "F")
             font.pixelSize: textSize
             color: "white"   
         }  

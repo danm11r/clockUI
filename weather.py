@@ -20,6 +20,7 @@ def get_curr_temp():
     temp = 0
     temp_min = 0
     temp_max = 0
+    metric = False
 
     # Block to catch missing or invalid .env file
     try:
@@ -55,6 +56,11 @@ def get_curr_temp():
         print("Unable to get generate API request - missing .env file?")
         err = 3
 
-    return [temp, temp_min, temp_max, err]
+    if os.getenv("UNITS") == "imperial":
+        metric = False
+    else:
+        metric = True
+
+    return [temp, temp_min, temp_max, metric, err]
 
 get_curr_temp()
