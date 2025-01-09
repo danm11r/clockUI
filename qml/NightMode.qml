@@ -82,7 +82,7 @@ Item {
         visible: true
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: text.top
-        text: currTemp.temp + "\u00B0"
+        text: currTemp.temp + "\u00B0" + (currTemp.metric ? "C" : "F")
         font.pixelSize: textSize*(1/2)
         color: nightColor 
     } 
