@@ -163,4 +163,29 @@ Item {
             }
         }
     }
+
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: clockRadius*(2/5)
+        spacing: buttonGap
+        
+        Text {
+            text: "24hr time"
+            font.pixelSize: clockRadius*(4/27)
+            color: "white"   
+        }  
+
+        CustomSwitch { 
+            width: 200
+            height: 100
+            state: (settings.time24hr == true) ? 'clicked' : ''
+
+            onStateChanged: {
+                print(state) 
+                settings.time24hr = (state == 'clicked') ? true : false
+                print(settings.time24hr)
+            }
+        }
+    }
 }

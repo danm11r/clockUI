@@ -51,6 +51,7 @@ ApplicationWindow {
         property string accent: "#CE2029"
         property string bgcolor: "#2A2A2A"   
         property int selectedThemeIndex: 0
+        property bool time24hr: false
     }
 
     // Error message properties. The error message will eventually be moved to its own qml file

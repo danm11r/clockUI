@@ -62,7 +62,7 @@ class Backend(QObject):
         else:
             PM = False
 
-        self.time.emit(time.tm_hour % 12, time.tm_min, time.tm_sec, hour, minute, PM)
+        self.time.emit(time.tm_hour, time.tm_min, time.tm_sec, hour, minute, PM)
 
     def update_date(self):
         day = datetime.today().strftime('%a')

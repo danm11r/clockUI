@@ -1,7 +1,8 @@
 // DM July 2024
 // clockUI
 // 
-// Simple clock face coppied from dashUI
+// Simple clock face copied from dashUI
+// Updated for 24hr time support
 
 import QtQuick 2.15
 import QtQuick.Shapes 1.15
@@ -51,7 +52,7 @@ Item {
     Text {
         id: timeText
         anchors.centerIn: parent
-        text: time.hour_text + ":" + time.minute_text
+        text: (settings.time24hr ? time.hour : time.hour % 12) + ":" + time.minute
         font.pixelSize: textSize
         font.bold: true
         color: "white"
@@ -133,7 +134,7 @@ Item {
                 width: arcWidth
                 height: arcWidth*2
                 radius: 180
-                color: (time.hour == index) ? settings.color2 : "white"
+                color: (time.hour % 12 == index) ? settings.color2 : "white"
                 transform: Rotation { origin.x: arcWidth/2; origin.y: clockRadius; angle: index*30 } 
             }
         }
