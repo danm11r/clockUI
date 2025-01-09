@@ -22,7 +22,7 @@ Item {
         anchors.centerIn: parent
 
         Text {
-            text: time.hour_text
+            text: (settings.time24hr ? time.hour : time.hour % 12)
             font.pixelSize: textSize
             color: nightColor
         }
@@ -49,9 +49,9 @@ Item {
             color: nightColor 
         } 
 
-        // PM visibility changes depending on bool value 
+        // PM only visible in 12hr mode
         Text {
-            visible: time.PM
+            visible: time.PM && !settings.time24hr
             anchors.verticalCenter: colon.verticalCenter
             text: "PM"
             font.pixelSize: textSize*(1/3)
