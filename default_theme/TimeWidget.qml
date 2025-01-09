@@ -70,7 +70,7 @@ Item {
     Text {
         id: hour
         anchors.centerIn: parent
-        text: time.hour_text + ":" + time.minute_text
+        text: (settings.time24hr == true ? time.hour : time.hour % 12)+ ":" + time.minute_text
         font.pixelSize: textSize
         color: "white"
     }

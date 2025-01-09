@@ -182,9 +182,7 @@ Item {
             state: (settings.time24hr == true) ? 'clicked' : ''
 
             onStateChanged: {
-                print(state) 
                 settings.time24hr = (state == 'clicked') ? true : false
-                print(settings.time24hr)
             }
         }
     }
