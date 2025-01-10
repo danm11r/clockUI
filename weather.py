@@ -14,9 +14,10 @@ import requests, os
 from dotenv import load_dotenv, dotenv_values, set_key
 
 dotenv_path = ".env"
-load_dotenv(dotenv_path)
 
 def get_curr_temp():
+
+    load_dotenv(override=True)
 
     temp = 0
     temp_min = 0
@@ -64,7 +65,7 @@ def get_curr_temp():
 
     return [temp, temp_min, temp_max, metric, err]
 
-def update_env(metric):
+def update_env_units(metric):
 
     err = 0
 

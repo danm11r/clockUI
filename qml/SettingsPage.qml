@@ -165,6 +165,8 @@ Item {
     }
 
     Row {
+        id: timeSwitch
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: clockRadius*(2/5)
@@ -183,6 +185,29 @@ Item {
 
             onStateChanged: {
                 settings.time24hr = (state == 'clicked') ? true : false
+            }
+        }
+    }
+
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: timeSwitch.bottom
+        anchors.topMargin: buttonGap
+        spacing: buttonGap
+        
+        Text {
+            text: (currTemp.metric == true) ? "C" : "F"
+            font.pixelSize: clockRadius*(4/27)
+            color: "white"   
+        }  
+
+        CustomSwitch { 
+            width: 200
+            height: 100
+            state: (currTemp.metric == true) ? 'clicked' : ''
+
+            onStateChanged: {
+                backend.update_units((state == 'clicked') ? true : false)
             }
         }
     }

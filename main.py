@@ -10,7 +10,7 @@ from PyQt5.QtCore import QTimer, QObject, pyqtSignal, pyqtSlot
 
 from time import strftime, localtime
 from datetime import datetime
-from weather import get_curr_temp
+from weather import get_curr_temp, update_env_units
 import calendar
 
 app = QGuiApplication(sys.argv)
@@ -71,11 +71,24 @@ class Backend(QObject):
 
         self.date.emit(day, date, totalDays)
 
+    # Manually refresh temperature data
     @pyqtSlot()
     def update_temp(self):
         temp = get_curr_temp()
 
         self.temp.emit(round(temp[0]), (round(temp[1])), round(temp[2]), temp[3], temp[4])
+
+    # Update units in .env file from settings page
+    @pyqtSlot(bool)
+    def update_units(self, i):
+
+        print("Unit update requested, refreshing temp data.", i)
+
+        err = update_env_units(i)
+
+        # If no error, refresh temperature
+        if err == 0:
+            self.update_temp()
 
 
 backend = Backend()
