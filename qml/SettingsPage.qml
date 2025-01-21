@@ -206,11 +206,15 @@ Item {
         CustomSwitch { 
             width: 200
             height: 100
-            state: (currTemp.metric == true) ? 'clicked' : ''
 
             onStateChanged: {
-                //backend.update_units((state == 'clicked') ? true : false)
-                currTemp.metric = (state == 'clicked') ? true : false
+                backend.update_units((state == 'clicked') ? true : false)
+            }
+
+            // Fix for binding loop on state property
+            Binding on state {
+                value: (currTemp.metric == true) ? 'clicked' : ''
+                delayed: true
             }
         }
     }
