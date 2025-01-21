@@ -50,6 +50,7 @@ ApplicationWindow {
         property string accent: "#CE2029"
         property string bgcolor: "#2A2A2A"   
         property int selectedThemeIndex: 0
+        property int currentViewIndex: 0
         property bool time24hr: false
     }
 
@@ -63,7 +64,7 @@ ApplicationWindow {
 
         visible: true
         
-        currentIndex: 2
+        currentIndex: settings.currentViewIndex
         
         height: parent.height
         width: parent.width
@@ -86,6 +87,10 @@ ApplicationWindow {
 
         Item {            
             SettingsPage {}
+        }
+
+        onCurrentIndexChanged: {
+            settings.currentViewIndex = currentIndex
         }
     }
 
