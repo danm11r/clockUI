@@ -164,16 +164,17 @@ Item {
         }
     }
 
+    // 12 or 24hr time select toggle
     Row {
         id: timeSwitch
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: clockRadius*(2/5)
+        anchors.bottomMargin: clockRadius*(2/6)
         spacing: buttonGap
         
         Text {
-            text: "24hr time"
+            text: (settings.time24hr == true) ? "24hr" : "12hr"
             font.pixelSize: clockRadius*(4/27)
             color: "white"   
         }  
@@ -189,14 +190,15 @@ Item {
         }
     }
 
+    // Fahrenheit or Celsius select toggle
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: timeSwitch.bottom
-        anchors.topMargin: buttonGap
+        anchors.topMargin: buttonGap/2
         spacing: buttonGap
         
         Text {
-            text: (currTemp.metric == true) ? "C" : "F"
+            text: "\u00B0" + ((currTemp.metric == true) ? "C" : "F")
             font.pixelSize: clockRadius*(4/27)
             color: "white"   
         }  
@@ -207,7 +209,8 @@ Item {
             state: (currTemp.metric == true) ? 'clicked' : ''
 
             onStateChanged: {
-                backend.update_units((state == 'clicked') ? true : false)
+                //backend.update_units((state == 'clicked') ? true : false)
+                currTemp.metric = (state == 'clicked') ? true : false
             }
         }
     }

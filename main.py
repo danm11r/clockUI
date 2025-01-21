@@ -82,8 +82,6 @@ class Backend(QObject):
     @pyqtSlot(bool)
     def update_units(self, i):
 
-        print("Unit update requested, refreshing temp data.", i)
-
         err = update_env_units(i)
 
         # If no error, refresh temperature
