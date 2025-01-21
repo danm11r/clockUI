@@ -37,7 +37,8 @@ Item {
     ErrorIcon{ x: 540; y: 540; height: 100; width: 100 }
     ErrorIcon{ x: 650; y: 540; height: 200; width: 200 }
 
-    CustomButton{ x: 140; y: 540; height: 100; width: 200 }
-    CustomButton{ x: 140; y: 640; height: 200; width: 400 }
+    CustomSwitch{ x: 140; y: 440; height: 100; width: 200; state: 'disabled'}
+    CustomSwitch{ x: 140; y: 640; height: 100; width: 200 }
+    CustomSwitch{ x: 140; y: 840; height: 200; width: 400; state: 'disabled'}
 
 }
