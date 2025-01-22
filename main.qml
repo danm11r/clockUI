@@ -95,11 +95,11 @@ ApplicationWindow {
         }
     }
 
-    // Blur interface when error dialog is displayed
+    // Blur swipe view when error dialog is displayed
     Loader {
         anchors.fill: parent
         id: blurLoader
-        active: true
+        active: false
         sourceComponent: Item {
             Rectangle {
                 anchors.fill: fastBlur
@@ -243,6 +243,13 @@ ApplicationWindow {
                     errorMsg.accept()
                 }
             }
+        }
+        onOpened: {
+            blurLoader.active = true
+        }  
+
+        onClosed: {
+            blurLoader.active = false
         }
     }
 
