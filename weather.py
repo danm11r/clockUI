@@ -45,17 +45,17 @@ def get_curr_temp():
 
                 # Able to reach open weather, but unsucessful response code
                 err = 1
-                print("Unable to get weather info - invalid API key?")
+                print("WeatherScript: Unable to get weather info - invalid API key?")
 
         except:
 
             # Unable to reach URL
             err = 2
-            print("Unable to reach URL - no network?")
+            print("WeatherScript: Unable to reach URL - no network?")
 
     except:
         # Unable to open .env file
-        print("Unable to get generate API request - missing .env file?")
+        print("WeatherScript: Unable to get generate API request - missing .env file?")
         err = 3
 
     if os.getenv("UNITS") == "imperial":
@@ -74,7 +74,7 @@ def update_env_units(metric):
     elif metric == False:
         set_key(dotenv_path, "UNITS", "imperial")
     else:
-        print("Unable to update units in .env - missing .env file?")
+        print("WeatherScript: Unable to update units in .env - missing .env file?")
         err = 1
 
     return err
