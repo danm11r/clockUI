@@ -6,6 +6,7 @@ import Qt.labs.settings 1.0
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Shapes 1.15
+import QtGraphicalEffects 1.15
 
 // Import theme directory for clock face and widgets
 import "./qml"
@@ -94,6 +95,31 @@ ApplicationWindow {
         }
     }
 
+    // Blur interface when error dialog is displayed
+    Loader {
+        anchors.fill: parent
+        id: blurLoader
+        active: true
+        sourceComponent: Item {
+            Rectangle {
+                anchors.fill: fastBlur
+                color: settings.bgcolor
+            }
+
+            FastBlur {
+                id: fastBlur
+
+                anchors.fill: parent
+
+                source: view
+
+                radius: 32
+                opacity: 0.6
+            }
+        }
+    }
+
+    // For debug only
     Text {
         visible: false
         anchors {
@@ -120,7 +146,6 @@ ApplicationWindow {
         color: "white"
     }
 
-    // The following code for the dialog box should eventually be moved elsewhere... 
     // Weather api error dialog 
     Dialog {
         id: errorMsg

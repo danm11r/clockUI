@@ -14,6 +14,11 @@ Item {
     property string nightColor: "#CE2029"
     property int textSize: clockRadius*(5/9)
 
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+    }
+
     // Time and PM display
     Row {
 

@@ -15,6 +15,11 @@ Item {
     property int arcGap: clockRadius*(1/60)
     property int widgetRadius: clockRadius*(8/27)
 
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+    }
+
     // Date widget that moves if clock hands overlap 
     Item {
         id: date

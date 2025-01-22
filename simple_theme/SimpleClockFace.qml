@@ -19,6 +19,11 @@ Item {
     property int textSize: clockRadius*(11/27)
     property int arcWidth: clockRadius*(2/45)
 
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+    }
+
     // Draw background gradient
     Shape {
 
