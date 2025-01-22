@@ -10,6 +10,7 @@ Item {
     id: customSwitch
 
     property bool disabled: false
+    property bool locked: false
 
     Rectangle {
         id: background
@@ -67,7 +68,7 @@ Item {
     }
 
     MouseArea {
-        enabled: !disabled
+        enabled: !disabled && !locked
         anchors.fill: parent
         onClicked: { 
             customSwitch.state == 'clicked' ? customSwitch.state = "" : customSwitch.state = 'clicked';

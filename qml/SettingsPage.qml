@@ -6,6 +6,8 @@ import QtQuick 2.15
 import QtQuick.Shapes 1.15
 
 Item {
+
+    id: settingsPage
     
     height: clockRadius*2
     width: clockRadius*2
@@ -203,11 +205,16 @@ Item {
             color: "white"   
         }  
 
+        // Switch is locked during API call and disabled if API call fails
         CustomSwitch { 
+
+            id: unitSwitch
+
             width: 200
             height: 100
 
             onStateChanged: {
+                settingsPage.state = 'locked'
                 backend.update_units((state == 'clicked') ? true : false)
             }
 
@@ -215,6 +222,32 @@ Item {
             Binding on state {
                 value: (currTemp.metric == true) ? 'clicked' : ''
                 delayed: true
+            }
+        }
+    }
+
+    states: [
+        State {
+            name: "error"
+            PropertyChanges { target: unitSwitch; disabled: true }
+        },
+        State {
+            name: "locked"
+            PropertyChanges { target: unitSwitch; locked: true }
+        }
+    ]
+
+    Connections {
+        target: backend
+        
+        function onTemp() {
+
+            // Determine the error state 
+            if (currTemp.tempErr == 0) {
+                settingsPage.state = ''
+            }
+            else {
+                settingsPage.state = 'error'
             }
         }
     }
