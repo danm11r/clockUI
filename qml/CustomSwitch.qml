@@ -9,6 +9,8 @@ Item {
 
     id: customSwitch
 
+    property bool disabled: false
+
     Rectangle {
         id: background
 
@@ -22,7 +24,7 @@ Item {
         id: hazardStripe
 
         anchors.fill: background
-        visible: false
+        visible: disabled
 
         Item {
 
@@ -54,11 +56,9 @@ Item {
 
     Rectangle {
 
-        visible: true
-
         id: circle
-        color: settings.color1
-        border.color: "white"
+        color: disabled ? settings.color3 : settings.color1
+        border.color: disabled ? "#B4B4B4" : "white"
         border.width: parent.width*(.05)
         height: parent.height
         width: parent.width*(.5)                    
@@ -67,7 +67,7 @@ Item {
     }
 
     MouseArea {
-        enabled: (parent.state == 'disabled') ? false : true
+        enabled: !disabled
         anchors.fill: parent
         onClicked: { 
             customSwitch.state == 'clicked' ? customSwitch.state = "" : customSwitch.state = 'clicked';
@@ -79,12 +79,6 @@ Item {
             name: "clicked"
             PropertyChanges { target: circle; x: parent.width*(.5) }
             //PropertyChanges { target: circle; color: settings.color1 } removed because current implimentation does not have set on and off positions
-        },
-        State {
-            name: "disabled"
-            PropertyChanges { target: circle; border.color: "#B4B4B4" }
-            PropertyChanges { target: circle; color: settings.color3 }
-            PropertyChanges { target: hazardStripe; visible: true }
         }
     ]
 
