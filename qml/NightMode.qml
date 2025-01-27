@@ -27,7 +27,7 @@ Item {
         anchors.centerIn: parent
 
         Text {
-            text: (settings.time24hr ? time.hour : time.hour % 12)
+            text: settings.time24hr ? time.hour_24_text : time.hour_12_text
             font.pixelSize: textSize
             color: nightColor
         }

@@ -25,7 +25,7 @@ ApplicationWindow {
 
     // Signals...
     property QtObject backend
-    property var time: {'hour': 0, 'minute': 0, 'second': 0, 'hour_text': "0", 'minute_text': "0", 'PM': false } // This shares the same name as the signal and should probably be changed to something else
+    property var time: {'hour': 0, 'minute': 0, 'second': 0, 'hour_12_text': "0", 'hour_24_text': "0", 'minute_text': "0", 'PM': false } // This shares the same name as the signal and should probably be changed to something else
     property var currDate: {'day': "-", 'date': 0, 'totalDays': 0 }
     property var currTemp: {'temp': 0, 'tempL': 0, 'tempH': 0, 'metric': false, 'tempErr': 0 }
     
@@ -113,8 +113,11 @@ ApplicationWindow {
 
                 source: view
 
-                radius: 32
-                opacity: 0.6
+                radius: 0
+                opacity: 1
+
+                NumberAnimation on radius { to: 32; duration: 250 }
+                NumberAnimation on opacity { to: 0.6; duration: 250 }
             }
         }
     }
@@ -244,6 +247,7 @@ ApplicationWindow {
                 }
             }
         }
+        
         onOpened: {
             blurLoader.active = true
         }  
@@ -256,8 +260,8 @@ ApplicationWindow {
     Connections {
         target: backend
 
-        function onTime (hour, minute, second, hour_text, minute_text, PM) {
-            time = {'hour': hour, 'minute': minute, 'second': second, 'hour_text': hour_text, 'minute_text': minute_text, 'PM': PM}
+        function onTime (hour, minute, second, hour_12_text, hour_24_text, minute_text, PM) {
+            time = {'hour': hour, 'minute': minute, 'second': second, 'hour_12_text': hour_12_text, 'hour_24_text': hour_24_text, 'minute_text': minute_text, 'PM': PM}
         }
 
         function onDate (day, date, totalDays) {

@@ -28,7 +28,7 @@ engine.load('main.qml')
 class Backend(QObject):
 
     # Signals for QML
-    time = pyqtSignal(int, int, int, str, str, bool, arguments=['hour', 'minute', 'second', 'hour_text', 'minute_text', 'PM'])
+    time = pyqtSignal(int, int, int, str, str, str, bool, arguments=['hour', 'minute', 'second', 'hour_12_text', 'hour_24_text', 'minute_text', 'PM'])
     date = pyqtSignal(str, int, int, arguments=['day', 'date', 'totalDays'])
     temp = pyqtSignal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
 
@@ -69,14 +69,15 @@ class Backend(QObject):
 
     def update_time(self):
         time = localtime()
-        hour = strftime("%-I", localtime()) 
+        hour_12 = strftime("%-I", localtime()) 
+        hour_24 = strftime("%-H", localtime()) 
         minute = strftime("%M", localtime()) 
         if (strftime("%p").upper() == "PM"):
             PM = True
         else:
             PM = False
 
-        self.time.emit(time.tm_hour, time.tm_min, time.tm_sec, hour, minute, PM)
+        self.time.emit(time.tm_hour, time.tm_min, time.tm_sec, hour_12, hour_24, minute, PM)
 
     def update_date(self):
         day = datetime.today().strftime('%a')

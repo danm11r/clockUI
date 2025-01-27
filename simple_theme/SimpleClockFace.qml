@@ -57,7 +57,7 @@ Item {
     Text {
         id: timeText
         anchors.centerIn: parent
-        text: (settings.time24hr ? time.hour : time.hour % 12) + ":" + time.minute
+        text: (settings.time24hr ? time.hour_24_text : time.hour_12_text) + ":" + time.minute_text
         font.pixelSize: textSize
         font.bold: true
         color: "white"
