@@ -53,6 +53,7 @@ ApplicationWindow {
         property int selectedThemeIndex: 0
         property int currentViewIndex: 0
         property bool time24hr: false
+        property int currentBrightness: 0
     }
 
     // Error message properties. The error message will eventually be moved to its own qml file
@@ -88,6 +89,10 @@ ApplicationWindow {
 
         Item {            
             SettingsPage {}
+        }
+
+        Item {            
+            SettingsPage2 {}
         }
 
         onCurrentIndexChanged: {

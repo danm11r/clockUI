@@ -12,6 +12,7 @@ from time import strftime, localtime
 from datetime import datetime
 from weather import get_curr_temp, update_env_units
 import calendar
+import os
 
 app = QGuiApplication(sys.argv)
 app.setOrganizationName("test")
@@ -101,6 +102,15 @@ class Backend(QObject):
         # If no error, refresh temperature
         if err == 0:
             self.update_temp()
+
+    # Update the DSI display brightness using brightnessctl
+    # This is most likely a temporary implimentation
+    @pyqtSlot(int)
+    def update_brightness(self, i):
+
+        print("Updating brightness...")
+        os.system("brightnessctl set " + str(i))
+        print(i)
 
 # Worker thread for temperature data API access
 class TempWorker(QObject):
