@@ -112,7 +112,7 @@ Item {
                     id: rect3
                     width: buttonSize; height: buttonSize
                     color: color2Array[index]
-                    radius: 180
+                    radius: 80
                 }
 
                 Rectangle {
@@ -120,6 +120,7 @@ Item {
                     y: buttonSize/2
                     width: buttonSize; height: 0
                     color: color1Array[index]
+                    radius: 30
                 }
 
                 Rectangle {
@@ -146,7 +147,7 @@ Item {
                     State {
                         name: "clicked"
                         PropertyChanges { target: rect1; y: -buttonSize }
-                        PropertyChanges { target: rect2; height: buttonSize/2; y: -buttonSize/2}
+                        PropertyChanges { target: rect2; height: buttonSize/2; y: -buttonSize/2; radius: 0 }
                         PropertyChanges { target: rect3; radius: 0 }
                         PropertyChanges { target: rect4; height: buttonSize/2; y: buttonSize}
                         PropertyChanges { target: rect5; y: buttonSize; }
@@ -156,6 +157,7 @@ Item {
                 transitions: Transition {
                     NumberAnimation { target: rect1; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
                     NumberAnimation { target: rect2; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                    NumberAnimation { target: rect2; property: "radius"; easing.type: Easing.InOutQuad; duration: animationDelay }
                     NumberAnimation { target: rect2; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
                     NumberAnimation { target: rect3; property: "radius"; easing.type: Easing.InOutQuad; duration: animationDelay }
                     NumberAnimation { target: rect4; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
