@@ -4,9 +4,9 @@
 import sys
 import random
 
-from PyQt5.QtGui import QGuiApplication, QFont
-from PyQt5.QtQml import QQmlApplicationEngine
-from PyQt5.QtCore import QTimer, QObject, pyqtSignal, pyqtSlot, QThread
+from PySide6.QtGui import QGuiApplication, QFont
+from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtCore import QTimer, QObject, Signal, Slot, QThread
 
 from time import strftime, localtime
 from datetime import datetime
@@ -15,6 +15,8 @@ import calendar
 import os
 
 app = QGuiApplication(sys.argv)
+
+# placeholder application identifiers
 app.setOrganizationName("test")
 app.setOrganizationDomain("test.com")
 app.setApplicationName("test")
@@ -29,12 +31,12 @@ engine.load('main.qml')
 class Backend(QObject):
 
     # Signals for QML
-    time = pyqtSignal(int, int, int, str, str, str, bool, arguments=['hour', 'minute', 'second', 'hour_12_text', 'hour_24_text', 'minute_text', 'PM'])
-    date = pyqtSignal(str, int, int, arguments=['day', 'date', 'totalDays'])
-    temp = pyqtSignal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
+    time = Signal(int, int, int, str, str, str, bool, arguments=['hour', 'minute', 'second', 'hour_12_text', 'hour_24_text', 'minute_text', 'PM'])
+    date = Signal(str, int, int, arguments=['day', 'date', 'totalDays'])
+    temp = Signal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
 
     # Signals for temperature worker
-    updateTemp = pyqtSignal()
+    updateTemp = Signal()
 
     def __init__(self):
         super().__init__()
@@ -88,13 +90,13 @@ class Backend(QObject):
         self.date.emit(day, date, totalDays)
 
     # Manually refresh temperature data
-    @pyqtSlot()
+    @Slot()
     def update_temp(self):
         
         self.updateTemp.emit()
 
     # Update units in .env file from settings page
-    @pyqtSlot(bool)
+    @Slot(bool)
     def update_units(self, i):
 
         err = update_env_units(i)
@@ -105,7 +107,7 @@ class Backend(QObject):
 
     # Update the DSI display brightness using brightnessctl
     # This is most likely a temporary implimentation
-    @pyqtSlot(int)
+    @Slot(int)
     def update_brightness(self, i):
 
         print("Updating brightness...")
@@ -115,7 +117,7 @@ class Backend(QObject):
 # Worker thread for temperature data API access
 class TempWorker(QObject):
 
-    temp = pyqtSignal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
+    temp = Signal(int, int, int, bool, int, arguments=['temp', 'tempL', 'tempH', 'tempMetric', 'tempErr'])
 
     # Fetch temperature data using seperate script
     def update(self):
