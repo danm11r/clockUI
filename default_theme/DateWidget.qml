@@ -32,23 +32,22 @@ Item {
                 sweepAngle: datePos
             }
         }
+    }
 
-        Column {
-            anchors.centerIn: parent
-            spacing: -widgetRadius*(5/19)
+    Column {
+        anchors.centerIn: parent
+        spacing: -widgetRadius*(5/19)
 
-            Text {
-                text: currDate.day
-                font.pixelSize: textSize
-                color: settings.color1
-            }
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                text: currDate.date
-                font.pixelSize: textSize
-                color: "white"   
-            }
+        Text {
+            text: currDate.day
+            font.pixelSize: textSize
+            color: settings.color1
+        }
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: currDate.date
+            font.pixelSize: textSize
+            color: "white"   
         }
     }
 

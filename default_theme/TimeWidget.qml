@@ -1,25 +1,17 @@
 // DM Jan 2024
 
 import QtQuick
-import QtQuick.Shapes
 
 Item {
 
-    // Draw the background circle
-    Shape {
-        ShapePath {
-            fillColor: settings.bgcolor
-            strokeColor: settings.bgcolor   
-            strokeWidth: arcWidth
-            capStyle: ShapePath.RoundCap
-
-            PathAngleArc {
-                centerX: 0; centerY: 0
-                radiusX: widgetRadius - arcWidth/2; radiusY: widgetRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        } 
+    // Draw background circle
+    Rectangle {
+        x: -widgetRadius
+        y: -widgetRadius
+        height: widgetRadius*2
+        width: widgetRadius*2
+        color: settings.bgcolor
+        radius: width/2
     }
 
     // Draw second marks
