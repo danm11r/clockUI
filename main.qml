@@ -17,8 +17,8 @@ import "./simple_theme"
 ApplicationWindow {
     id: main
     visible: true
-    width: 1080
-    height: 1080
+    width: 720
+    height: 720
 
     title: "clockUI"
     color: "black"
@@ -163,23 +163,28 @@ ApplicationWindow {
         width: clockRadius
 
         header: ToolBar {
+
+            // fix for qt6, header rectangle was misaligned - this wasn't an issue for qt5, did the default change?
+            leftPadding: 0
+
+            // Added rectangle to pad the header
             Rectangle {
-                y: clockRadius*(5/54)
-                height: clockRadius*(5/54)
+                y: clockRadius*(0.1)
+                height: clockRadius*(0.1)
                 width: clockRadius
                 color: settings.color2
             }
             Label {
                 text: "Weather Error"
                 color: "white"
-                font.pixelSize: clockRadius*(1/10)
+                font.pixelSize: clockRadius*(0.1)
                 anchors.centerIn: parent
             }
             background: Rectangle {
 
-                implicitHeight: clockRadius*(5/27)
+                implicitHeight: clockRadius*(0.2)
                 color: settings.color2
-                radius: 90
+                radius: clockRadius*(0.17)
             }
         }
 
@@ -187,7 +192,7 @@ ApplicationWindow {
             color: "#2A2A2A"
             border.color: settings.color2
             border.width: arcWidth
-            radius: clockRadius*(1/12)
+            radius: clockRadius*(0.1)
         }
 
         contentItem: Text {
@@ -196,7 +201,7 @@ ApplicationWindow {
             text: errorText
             font.pixelSize: errorTextSize
             color: "white"
-            leftPadding: clockRadius*(2/45)
+            leftPadding: clockRadius*(0.05)
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -204,9 +209,9 @@ ApplicationWindow {
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: clockRadius*(2/45)
+            anchors.bottomMargin: clockRadius*(0.05)
 
-            spacing: clockRadius*(1/27)
+            spacing: clockRadius*(0.04)
 
             Button {
 
@@ -219,10 +224,10 @@ ApplicationWindow {
                 }
                 
                 background: Rectangle {
-                    implicitHeight: clockRadius*(5/27)
-                    implicitWidth: clockRadius*(10/27)
+                    implicitHeight: clockRadius*(0.2)
+                    implicitWidth: clockRadius*(0.4)
                     color: settings.color2
-                    radius: 45
+                    radius: clockRadius*(0.07)
                 }
 
                 DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
@@ -239,10 +244,10 @@ ApplicationWindow {
                 }
                 
                 background: Rectangle {
-                    implicitHeight: clockRadius*(5/27)
-                    implicitWidth: clockRadius*(10/27)
+                    implicitHeight: clockRadius*(0.2)
+                    implicitWidth: clockRadius*(0.4)
                     color: settings.color2
-                    radius: 45
+                    radius: clockRadius*(0.07)
                 }
 
                 DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
