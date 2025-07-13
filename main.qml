@@ -87,16 +87,98 @@ ApplicationWindow {
             DefaultClockFace{}
         }
 
-        Item {            
-            ThemePage {}
-        }
-
-        Item {            
-            SettingsPage {}
-        }
-
         onCurrentIndexChanged: {
             settings.currentViewIndex = currentIndex
+        }
+    }
+
+    /*
+    The following two flickables are used for displaying the settings and theme pages. 
+    They do not have any content, and are simply used for the FlickStarted signal. Flick 
+    direction is determined manually.    
+    */
+
+    // Flick down the settings page
+    Flickable {
+        id: settingsFlickable
+        
+        height: clockRadius*(.5)
+        width: parent.width
+
+        flickableDirection : Flickable.VerticalFlick
+
+        onFlickStarted: {
+
+            // In the down state, the settings page is visible
+            // The background view is set to non-interactive and the theme flickable is disabled 
+            if (0 > contentY) {
+                console.log("flicked down")
+                settingsPage.y = 0
+                view.interactive = false
+                themeFlickable.interactive = false
+            }
+            else {
+                console.log("flicked up")
+                settingsPage.y = -clockRadius*2
+                view.interactive = true
+                themeFlickable.interactive = true
+            }
+        }
+    }
+
+    // Flick up the theme page
+    Flickable {
+        id: themeFlickable
+
+        y: clockRadius*(1.5)
+
+        height: clockRadius*(.5)
+        width: parent.width
+
+        flickableDirection : Flickable.VerticalFlick
+
+        onFlickStarted: {
+
+            console.log(contentY)
+
+            if (0 > contentY) {
+                console.log("flicked down")
+                themePage.y = clockRadius*2 
+                view.interactive = true
+                settingsFlickable.interactive = true
+            }
+
+            // In the up state, the theme page is visible
+            // The background view is set to non-interactive and the settings flickable is disabled 
+            else {
+                console.log("flicked up")
+                themePage.y = 0
+                view.interactive = false
+                settingsFlickable.interactive = false
+            }
+        }
+    }
+
+    // The following two pages are loaded offscreen
+    SettingsPage {
+
+        id: settingsPage
+
+        y: -clockRadius*2 
+
+        Behavior on y {
+            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+        }
+    }
+
+    ThemePage {
+
+        id: themePage
+
+        y: clockRadius*2 
+
+        Behavior on y {
+            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
         }
     }
 
