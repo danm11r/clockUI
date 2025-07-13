@@ -1,8 +1,7 @@
 // DM June 2024
 // Generic error icon. Specify height and width
 
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+import QtQuick
 
 Item {
 

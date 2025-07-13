@@ -3,9 +3,9 @@
 // main.py stores global properties and imports clockfaces
 
 import QtCore
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Shapes 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 
 // Import theme directory for clock face and widgets

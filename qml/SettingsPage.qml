@@ -2,8 +2,8 @@
 // 
 // settings page currently only allows changing color scheme
 
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+import QtQuick
+import QtQuick.Shapes
 
 Item {
 

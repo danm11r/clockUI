@@ -4,8 +4,8 @@
 // Simple clock face copied from dashUI
 // Updated for 24hr time support
 
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+import QtQuick
+import QtQuick.Shapes
 
 Item {
 

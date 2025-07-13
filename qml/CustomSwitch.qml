@@ -1,8 +1,7 @@
 // DM June 2024
 // Simple toggle switch
 
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+import QtQuick
 import Qt5Compat.GraphicalEffects
 
 Item {

@@ -3,7 +3,7 @@
 // 
 // This represents the clock face. Widgets are placed and positioned within 
 
-import QtQuick 2.15
+import QtQuick
 
 Item {
 
