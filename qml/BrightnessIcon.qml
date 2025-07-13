@@ -29,8 +29,8 @@ Item {
         anchors.centerIn: parent
 
         color: settings.color2
-        height: 25
-        width: 25
+        height: parent.height*(0.35)
+        width: parent.width*(0.35)
         radius: 180
     }
 }

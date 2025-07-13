@@ -88,11 +88,11 @@ ApplicationWindow {
         }
 
         Item {            
-            SettingsPage {}
+            ThemePage {}
         }
 
         Item {            
-            SettingsPage2 {}
+            SettingsPage {}
         }
 
         onCurrentIndexChanged: {

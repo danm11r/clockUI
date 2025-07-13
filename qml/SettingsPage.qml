@@ -1,9 +1,9 @@
-// DM Jan 2024
+// DM July 2025
 // 
-// settings page currently only allows changing color scheme
+// change screen brightness, toggle 12hr time, select temp units
 
 import QtQuick
-import QtQuick.Shapes
+import QtQuick.Controls
 
 Item {
 
@@ -12,218 +12,144 @@ Item {
     height: clockRadius*2
     width: clockRadius*2
 
-    property int arcWidth: clockRadius*(1/30)
-    
-    property int buttonSize: clockRadius*(5/18)
-    property int buttonGap: clockRadius*(5/54)
-    
+    property int arcWidth: clockRadius*(0.03)
+    property int buttonSize: clockRadius*(0.2)
+    property int buttonGap: clockRadius*(0.1)
+
     // Draw background circle
-    Shape {
-        ShapePath {
-            fillColor: "#2A2A2A"
-            strokeColor: "#2A2A2A"   
-            strokeWidth: arcWidth
-            capStyle: ShapePath.RoundCap
+    Rectangle {
+        height: clockRadius*2
+        width: clockRadius*2
+        color: settings.bgcolor
+        radius: width/2
 
-            PathAngleArc {
-                centerX: clockRadius; centerY: clockRadius
-                radiusX: clockRadius - arcWidth/2; radiusY: clockRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        } 
-    }
-
-    // Perimeter color
-    Shape {
-
-        ShapePath {
-            fillColor: "transparent"
-            strokeColor: settings.color1
-            strokeWidth: arcWidth
-
-            PathAngleArc {
-                centerX: clockRadius; centerY: clockRadius
-                radiusX: clockRadius - arcWidth/2; radiusY: clockRadius - arcWidth/2;
-                startAngle: 0
-                sweepAngle: 360
-            }
-        }
+        border.width: arcWidth
+        border.color: settings.color1
     }
 
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: clockRadius*(5/27)
-        text: "settings"
-        font.pixelSize: clockRadius*(4/27)
+        anchors.topMargin: clockRadius*(0.2)
+        text: "Settings"
+        font.pixelSize: clockRadius*(0.15)
         color: "white"   
-    }  
+    }
 
-    // Use repeater to create theme color selection buttons
-    Row {
+    Column{
 
-        anchors.horizontalCenter: parent.horizontalCenter
-
+        anchors.centerIn: parent
         spacing: buttonGap
 
-        Repeater{
+        // 12 or 24hr time select toggle
+        Row {
+            
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: buttonGap
+            
+            Text {
+                text: (settings.time24hr == true) ? "24hr" : "12hr"
+                font.pixelSize: clockRadius*(0.15)
+                color: "white"   
+            }  
 
-            id: colorButtonRepeater
-            model: color1Array.length
+            CustomSwitch { 
+                width: buttonSize*2
+                height: buttonSize
+                state: (settings.time24hr == true) ? 'clicked' : ''
 
-            Item {
+                onStateChanged: {
+                    settings.time24hr = (state == 'clicked') ? true : false
+                }
+            }
+        }
 
-                id: colorButton
+        // Fahrenheit or Celsius select toggle
+        Row {
 
-                x: clockRadius*(10/27)
-                y: clockRadius-clockRadius*(5/27)
-                state: (settings.selectedThemeIndex == index) ? 'clicked' : '' // Set button for selected theme to clicked state
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: buttonGap
+            
+            Text {
+                text: "\u00B0" + ((currTemp.metric == true) ? "C" : "F")
+                font.pixelSize: clockRadius*(0.15)
+                color: "white"   
+            }  
 
-                width: buttonSize
+            // Switch is locked during API call and disabled if API call fails
+            CustomSwitch { 
+
+                id: unitSwitch
+
+                width: buttonSize*2
                 height: buttonSize
 
-                // When a button is selected reset all other buttons 
-                function resetButtons() {
-                    for (var i = 0; i < color1Array.length; i++) {
-                        if (i != index) {
-                            colorButtonRepeater.itemAt(i).state = 'unclicked'
-                        }
-                    }
+                onStateChanged: {
+                    settingsPage.state = 'locked'
+                    backend.update_units((state == 'clicked') ? true : false)
                 }
 
-                Rectangle {
-                    id: rect5
-                    width: buttonSize; height: buttonSize
-                    color: color3Array[index]
-                    radius: 180
-                }
-
-
-                Rectangle {
-                    id: rect4
-                    y: buttonSize/2
-                    width: buttonSize; height: 0
-                    color: color3Array[index]
-                }
-
-
-                Rectangle {
-                    id: rect3
-                    width: buttonSize; height: buttonSize
-                    color: color2Array[index]
-                    radius: 80
-                }
-
-                Rectangle {
-                    id: rect2
-                    y: buttonSize/2
-                    width: buttonSize; height: 0
-                    color: color1Array[index]
-                    radius: 30
-                }
-
-                Rectangle {
-                    id: rect1
-                    width: buttonSize; height: buttonSize
-                    color: color1Array[index]
-                    radius: 180
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: { 
-                        colorButton.state = 'clicked'
-                        resetButtons()
-                        settings.selectedThemeIndex = index
-                        settings.color1 = color1Array[index]
-                        settings.color2 = color2Array[index]
-                        settings.color3 = color3Array[index]
-                        settings.color4 = color4Array[index]
-                    }
-                }
-
-                states: [
-                    State {
-                        name: "clicked"
-                        PropertyChanges { target: rect1; y: -buttonSize }
-                        PropertyChanges { target: rect2; height: buttonSize/2; y: -buttonSize/2; radius: 0 }
-                        PropertyChanges { target: rect3; radius: 0 }
-                        PropertyChanges { target: rect4; height: buttonSize/2; y: buttonSize}
-                        PropertyChanges { target: rect5; y: buttonSize; }
-                    }
-                ]
-
-                transitions: Transition {
-                    NumberAnimation { target: rect1; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect2; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect2; property: "radius"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect2; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect3; property: "radius"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect4; property: "height"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect4; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
-                    NumberAnimation { target: rect5; property: "y"; easing.type: Easing.InOutQuad; duration: animationDelay }
+                // Fix for binding loop on state property
+                Binding on state {
+                    value: (currTemp.metric == true) ? 'clicked' : ''
+                    delayed: true
                 }
             }
         }
-    }
 
-    // 12 or 24hr time select toggle
-    Row {
-        id: timeSwitch
+        // Brightness slider copied from DashUI
+        Row {
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: clockRadius*(2/6)
-        spacing: buttonGap
-        
-        Text {
-            text: (settings.time24hr == true) ? "24hr" : "12hr"
-            font.pixelSize: clockRadius*(4/27)
-            color: "white"   
-        }  
+            anchors.horizontalCenter: parent.horizontalCenter
 
-        CustomSwitch { 
-            width: 200
-            height: 100
-            state: (settings.time24hr == true) ? 'clicked' : ''
+            BrightnessIcon { height: buttonSize; width: buttonSize }
 
-            onStateChanged: {
-                settings.time24hr = (state == 'clicked') ? true : false
-            }
-        }
-    }
+            // Brightness slider from 1 to 255
+            Slider {
 
-    // Fahrenheit or Celsius select toggle
-    Row {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: timeSwitch.bottom
-        anchors.topMargin: buttonGap/2
-        spacing: buttonGap
-        
-        Text {
-            text: "\u00B0" + ((currTemp.metric == true) ? "C" : "F")
-            font.pixelSize: clockRadius*(4/27)
-            color: "white"   
-        }  
+                id: control
 
-        // Switch is locked during API call and disabled if API call fails
-        CustomSwitch { 
+                stepSize: 5
+                from: 10
+                value: settings.currentBrightness
+                to: 255
 
-            id: unitSwitch
+                leftPadding: buttonGap
 
-            width: 200
-            height: 100
+                background: Rectangle {
+                    x: control.leftPadding
+                    y:  control.availableHeight / 2 - height / 2
+                    implicitWidth: 400
+                    implicitHeight: clockRadius*(0.07)
+                    width: control.availableWidth
+                    height: implicitHeight
+                    radius: 180
+                    color: "#bdbebf"
 
-            onStateChanged: {
-                settingsPage.state = 'locked'
-                backend.update_units((state == 'clicked') ? true : false)
-            }
+                    Rectangle {
+                        width: control.visualPosition * parent.width
+                        height: parent.height
+                        color: settings.color2
+                        radius: 180
+                    }
+                }
+                
+                handle: Rectangle {
+                    x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
+                    y: control.availableHeight / 2 - height / 2
+                    implicitWidth: buttonSize
+                    implicitHeight: buttonSize
+                    radius: width/2
+                    color: control.pressed ? "#f0f0f0" : "#f6f6f6"
+                    border.color: "#bdbebf"
+                }
 
-            // Fix for binding loop on state property
-            Binding on state {
-                value: (currTemp.metric == true) ? 'clicked' : ''
-                delayed: true
+                // Only update when slider is clicked or released because brightness updates are too slow for continuous updating
+                // The above comment was relevant for DashUI but probably not the case for ClockUI as brightness is changed differently
+                onPressedChanged: {
+                    backend.update_brightness(value)
+                    settings.currentBrightness = value
+                }
             }
         }
     }
