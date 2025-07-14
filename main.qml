@@ -13,6 +13,7 @@ import "./qml"
 import "./analog_theme"
 import "./default_theme"
 import "./simple_theme"
+import "./modern_theme"
 
 ApplicationWindow {
     id: main
@@ -73,6 +74,10 @@ ApplicationWindow {
 
         Item {
             NightMode {}
+        }
+
+        Item {
+            ModernClockFace{}
         }
 
         Item {
@@ -224,7 +229,7 @@ ApplicationWindow {
     }
 
     Text {
-        visible: false
+        visible: true
         anchors {
             top: parent.top
             topMargin: 12
