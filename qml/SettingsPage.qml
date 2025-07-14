@@ -42,18 +42,27 @@ Item {
         spacing: buttonGap
 
         // 12 or 24hr time select toggle
-        Row {
-            
+        // Update: layout changed so that the text and button are both anchored
+        // to the center of the page and buttons will line up regardless of text size
+        Item {
+   
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: buttonGap
+            height: buttonSize
+            width: 1
             
             Text {
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: buttonGap*(0.5)
+
                 text: (settings.time24hr == true) ? "24hr" : "12hr"
                 font.pixelSize: clockRadius*(0.15)
                 color: "white"   
             }  
 
             CustomSwitch { 
+                anchors.left: parent.horizontalCenter
+                anchors.leftMargin: buttonGap*(0.5)
+
                 width: buttonSize*2
                 height: buttonSize
                 state: (settings.time24hr == true) ? 'clicked' : ''
@@ -64,13 +73,17 @@ Item {
             }
         }
 
-        // Fahrenheit or Celsius select toggle
-        Row {
+        // Fahrenheit or Celsius select toggle   
+        Item {
 
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: buttonGap
-            
+            height: buttonSize
+            width: 1
+
             Text {
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: buttonGap*(0.5)
+
                 text: "\u00B0" + ((currTemp.metric == true) ? "C" : "F")
                 font.pixelSize: clockRadius*(0.15)
                 color: "white"   
@@ -78,8 +91,10 @@ Item {
 
             // Switch is locked during API call and disabled if API call fails
             CustomSwitch { 
-
                 id: unitSwitch
+
+                anchors.left: parent.horizontalCenter
+                anchors.leftMargin: buttonGap*(0.5)
 
                 width: buttonSize*2
                 height: buttonSize
@@ -95,7 +110,7 @@ Item {
                     delayed: true
                 }
             }
-        }
+        }   
 
         // Brightness slider copied from DashUI
         Row {
