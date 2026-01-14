@@ -11,5 +11,3 @@ pip install -r requirements.txt
 
 # Install font
 sudo apt-get install fonts-noto -y
-
-

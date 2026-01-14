@@ -53,7 +53,7 @@ class Backend(QObject):
         self.timer2.timeout.connect(self.update_date)
         self.timer2.start()
 
-        # 1m timer for temperature update. Runs once a minute
+        # 1m timer for temperature update
         self.timer3 = QTimer()
         self.timer3.setInterval(60000)
         self.timer3.timeout.connect(self.update_temp)
