@@ -61,7 +61,7 @@ Item {
         target: backend
 
         function onTime() {
-            if ((time.hour >= 4 && time.hour < 8) || time.hour >= 10 || time.hour < 2) {
+            if ((time.hour % 12 >= 4 && time.hour % 12 < 8) || (time.hour % 12 >= 10 && time.hour % 12 < 2)) {
                 date.state = "moved"
                 weather.state = "moved"
             }
@@ -70,6 +70,5 @@ Item {
                 weather.state = ""
             }
         }
-
     }
 }
